@@ -1,0 +1,31 @@
+{
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
+    },
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import"
+    ],
+    "rules": {
+        // 缩进为4个空格（默认值）
+        "indent": 2,
+        "no-var": 1,
+        "no-alert": 2,
+        //表示在Windows下默认的换行回车符，CRLF  \r\n
+        "linebreak-style":[1,"windows"],
+        "no-console": 0,
+        "no-unused-vars":"warn",
+        "global-require":"warn",
+        "no-underscore-dangle":"off",
+        "react/jsx-filename-extension":"off",
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    }
+}
