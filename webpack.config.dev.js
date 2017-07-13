@@ -13,7 +13,7 @@ module.exports = {
   ],
   // output.publicPath 表示资源的发布地址，当配置过该属性后，打包文件中所有通过相对路径引用的资源都会被配置的路径所替换
   output: {
-    path: path.resolve(__dirname, 'client'), // 与APP_PATH一致的文件目录
+    path: path.resolve(__dirname, 'build/client'), // 与APP_PATH一致的文件目录
     filename: 'devClient.bundle.js',
     publicPath: '/',
   },
@@ -22,7 +22,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: { 
+        use: {
           loader: 'babel-loader',
           query: {
             presets: ['react-hmre'],
