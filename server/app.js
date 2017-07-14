@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var AV = require('leanengine');
+var webpack = require('webpack');
 
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
 require('./cloud/cloud.js');
@@ -28,6 +29,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+if (process.env.NODE_ENV === 'development') { // 开发模式下
+  const webpackconfig = require('../webpack.config.dev.js');
+  const compiler = webpack(webpackconfig);
+  app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: webpackconfig.output.publicPath,
+    stats: {
+      assets: false,
+      colors: true,
+      version: false,
+      hash: false,
+      timings: false,
+      chunks: false,
+      chunkModules: false,
+    },
+  }));
+  app.use(require('webpack-hot-middleware')(compiler));
+  app.use(express.static(path.resolve(__dirname, './app/JdBus/src'))); // 与webpack.dev中一致
+} else if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'public')));
+}
 
 // 可以将一类的路由单独保存在一个文件中
 app.use('/', require('./server/index.js'));
