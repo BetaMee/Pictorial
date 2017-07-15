@@ -1,17 +1,23 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import timeout from 'connect-timeout';
-import path from 'path';
-import AV from 'leanengine';
-import webpack from 'webpack';
+'use strict';
 
-import { RenderClientPage, RenderManagePage } from './view/view';
+var _client = require('./view/client');
+
+var _client2 = _interopRequireDefault(_client);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var express = require('express');
+var timeout = require('connect-timeout');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var AV = require('leanengine');
+var webpack = require('webpack');
 
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
-// require('./cloud/cloud.js');
+require('./cloud/cloud.js');
 
-const app = express();
-
+var app = express();
 
 app.use(express.static(path.resolve(__dirname, '../build')));
 
@@ -27,11 +33,12 @@ app.enable('trust proxy');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-//热加载热替换在开发环境下的配置
-if (process.env.NODE_ENV === 'development') { // 开发模式下
-  const webpackconfig = require('../webpack.config.dev.js');
-  const compiler = webpack(webpackconfig);
+if (process.env.NODE_ENV === 'development') {
+  // 开发模式下
+  var webpackconfig = require('../webpack.config.dev.js');
+  var compiler = webpack(webpackconfig);
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: webpackconfig.output.publicPath,
@@ -42,35 +49,30 @@ if (process.env.NODE_ENV === 'development') { // 开发模式下
       hash: false,
       timings: false,
       chunks: false,
-      chunkModules: false,
-    },
+      chunkModules: false
+    }
   }));
   app.use(require('webpack-hot-middleware')(compiler));
-} 
+}
 
-
-
-// app.use('/apiclient', function(req, res, next) {
-//   res.send('client');
-// });
-
-// app.use('/apimanage', function(req, res, next) {
-//   res.send('manage');
-// });
-
-
-// app.get('/manage', function(req, res, next) {
-//   res.sendFile(path.resolve(__dirname, './manage.html'));
-// });
-
-app.get('/', (req, res, next) => {
-  const html = RenderClientPage(process.env.NODE_ENV);
-  res.status(200).end(html);
+app.use('/apiclient', function (req, res, next) {
+  res.send('client');
 });
 
+app.use('/apimanage', function (req, res, next) {
+  res.send('manage');
+});
 
+app.get('/manage', function (req, res, next) {
+  res.sendFile(path.resolve(__dirname, './manage.html'));
+});
 
-app.use((req, res, next) => {
+app.get('/', function (req, res, next) {
+  console.log('hhh');
+  res.sendFile(path.resolve(__dirname, './client.html'));
+});
+
+app.use(function (req, res, next) {
   // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
   if (!res.headersSent) {
     var err = new Error('Not Found');
@@ -80,7 +82,7 @@ app.use((req, res, next) => {
 });
 
 // error handlers
-app.use((err, req, res, next) => {
+app.use(function (err, req, res, next) {
   if (req.timedout && req.headers.upgrade === 'websocket') {
     // 忽略 websocket 的超时
     return;
@@ -104,3 +106,4 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
+//# sourceMappingURL=app.js.map
