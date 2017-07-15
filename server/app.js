@@ -13,7 +13,7 @@ require('./cloud/cloud.js');
 var app = express();
 
 
-app.use(express.static('public'));
+app.use(express.static(path.resolve(__dirname, '../build')));
 
 // 设置默认超时时间
 app.use(timeout('15s'));
@@ -46,13 +46,31 @@ if (process.env.NODE_ENV === 'development') { // 开发模式下
     },
   }));
   app.use(require('webpack-hot-middleware')(compiler));
-  app.use(express.static(path.resolve(__dirname, './app/JdBus/src'))); // 与webpack.dev中一致
-} else if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'public')));
-}
+} 
 
-// 可以将一类的路由单独保存在一个文件中
-app.use('/', require('./server/index.js'));
+
+
+
+
+app.use('/apiclient', function(req, res, next) {
+  res.send('client');
+});
+
+app.use('/apimanage', function(req, res, next) {
+  res.send('manage');
+});
+
+
+app.get('/manage', function(req, res, next) {
+  res.sendFile(path.resolve(__dirname, './manage.html'));
+});
+
+app.get('/', function(req, res, next) {
+  console.log('hhh');
+  res.sendFile(path.resolve(__dirname, './client.html'));
+});
+
+
 
 app.use(function(req, res, next) {
   // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
