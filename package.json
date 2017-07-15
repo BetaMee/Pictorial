@@ -5,7 +5,7 @@
   "description": "a Pictorial App",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "cross-env NODE_ENV=development node server.js ",
     "dev": "nodemon server.js",
     "build": "webpack --config webpack.config.dev.js"
   },
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
+    "cross-env": "^5.0.1",
     "eslint": "^4.2.0",
     "eslint-config-airbnb": "^15.0.2",
     "eslint-plugin-import": "^2.7.0",
