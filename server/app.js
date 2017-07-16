@@ -64,7 +64,7 @@ if (process.env.NODE_ENV === 'development') { // 开发模式下
 // });
 
 app.get('/', (req, res, next) => {
-  const html = RenderClientPage(process.env.NODE_ENV);
+  const html = RenderClientPage(process.env.NODE_ENV); 
   res.status(200).end(html);
 });
 

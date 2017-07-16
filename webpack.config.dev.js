@@ -17,6 +17,9 @@ module.exports = {
     filename: 'devClient.bundle.js',
     publicPath: '/',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {

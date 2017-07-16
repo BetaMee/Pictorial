@@ -83,8 +83,9 @@ if (process.env.NODE_ENV === 'development') {
 // });
 
 app.get('/', function (req, res, next) {
-  var html = (0, _view.RenderClientPage)(process.env.NODE_ENV);
-  res.status(200).end(html);
+  // const html = RenderClientPage(process.env.NODE_ENV);
+  console.log("hhhh");
+  res.status(200).end("aaa");
 });
 
 app.use(function (req, res, next) {
