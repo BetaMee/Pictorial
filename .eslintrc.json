@@ -19,10 +19,9 @@
         "indent": 2,
         "no-var": 1,
         "no-alert": 2,
-        //表示在Windows下默认的换行回车符，CRLF  \r\n
-        "linebreak-style":[1,"windows"],
         "no-console": 0,
         "no-unused-vars":"warn",
+        "linebreak-style":[1,"windows"],
         "global-require":"warn",
         "no-underscore-dangle":"off",
         "react/jsx-filename-extension":"off",
