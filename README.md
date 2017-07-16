@@ -50,8 +50,8 @@
 
 ## Configuration Progress
 
-- webpack-dev-middleware + webpack-hot-middleware实现前端react代码热加载热替换
-- nodemon + babel-node + vscode debugger 实现后端代码配置变化监控、自动重启、调试、编译
+- <s>webpack-dev-middleware + webpack-hot-middleware实现前端react代码热加载热替换</s>
+- <s>nodemon + babel-node + vscode debugger 实现后端代码配置变化监控、自动重启、调试、编译</s>
 - webpack搭配postcss等插件处理css、图片等资源
 - webpack处理**多页面**打包
 - webpack处理生产环境下的打包
@@ -59,6 +59,7 @@
 ## App Progress
 
 - react + react-router + redux，合理设计组件
+- code splitting
 - 进度条的设计
 - 懒加载，占位符
 - 加入微信账号系统
