@@ -1,52 +1,64 @@
-# Node.js Getting started
-在 LeanCloud 云引擎上使用 Express 的 Node.js 实例项目。
+## 一个画报app应用
 
-## 一键部署
-[![Deploy to LeanEngine](http://ac-32vx10b9.clouddn.com/109bd02ee9f5875a.png)](https://leancloud.cn/1.1/engine/deploy-button)
+一个小小的单页应用
 
-## 本地运行
+## Technology Stack
 
-首先确认本机已经安装 [Node.js](http://nodejs.org/) 运行环境和 [LeanCloud 命令行工具](https://leancloud.cn/docs/leanengine_cli.html)，然后执行下列指令：
+###　FrontEnd
 
-```
-$ git clone https://github.com/leancloud/node-js-getting-started.git
-$ cd node-js-getting-started
-```
+- [React](https://github.com/facebook/react)
+- [React Router 4](https://reacttraining.com/react-router/)
+- [Redux](https://github.com/reactjs/redux)
+- [React Router Reudex]()
+- [PostCSS]()
+- [CSS Modules]()
 
-安装依赖：
 
-```
-npm install
-```
+###　BackEnd
 
-登录并关联应用：
+- [Nodejs v6.9.0]()
+- [Express]()
 
-```
-lean login
-lean switch
-```
+### Auth
+- [jsonwebtoken]()
 
-启动项目：
+### Cloud
 
-```
-lean up
-```
+- [LeanCloud]()
 
-之后你就可以在 [localhost:3000](http://localhost:3000) 访问到你的应用了。
+### Development tools
 
-## 部署到 LeanEngine
+- [npm v5]()
+- [Webpack v3]()
+- [bundle loader]()
+- [Nodemon]()
+- [Babel v6](https://github.com/babel/babel)
+- [ESLint](https://github.com/eslint/eslint)
+- [Webpack-dev-middleware]()
+- [Webpack-hot-middleware]()
 
-部署到预备环境（若无预备环境则直接部署到生产环境）：
-```
-lean deploy
-```
 
-## 相关文档
 
-* [云函数开发指南](https://leancloud.cn/docs/leanengine_cloudfunction_guide-node.html)
-* [网站托管开发指南](https://leancloud.cn/docs/leanengine_webhosting_guide-node.html)
-* [JavaScript 开发指南](https://leancloud.cn/docs/leanstorage_guide-js.html)
-* [JavaScript SDK API](https://leancloud.github.io/javascript-sdk/docs/)
-* [Node.js SDK API](https://github.com/leancloud/leanengine-node-sdk/blob/master/API.md)
-* [命令行工具使用指南](https://leancloud.cn/docs/leanengine_cli.html)
-* [云引擎常见问题和解答](https://leancloud.cn/docs/leanengine_faq.html)
+## Feature
+
+- ECMAScript 6
+- Babel-node编译node端es6代码
+- 使用VSCode调试node代码
+- nodemon监控后端代码，自动重启
+- webpack + bundle loader+ react-router v4实现code splitting
+- PostCSS搭配autoprefixer，直接使用CSS
+
+## Configuration Progress
+
+- webpack-dev-middleware + webpack-hot-middleware实现前端react代码热加载热替换
+- nodemon + babel-node + vscode debugger 实现后端代码配置变化监控、自动重启、调试、编译
+- webpack搭配postcss等插件处理css、图片等资源
+- webpack处理**多页面**打包
+- webpack处理生产环境下的打包
+
+## App Progress
+
+- react + react-router + redux，合理设计组件
+- 进度条的设计
+- 懒加载，占位符
+- 加入微信账号系统
