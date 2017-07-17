@@ -63,8 +63,8 @@ if (process.env.NODE_ENV === 'development') { // 开发模式下
 //   res.sendFile(path.resolve(__dirname, './manage.html'));
 // });
 
-app.get('/', (req, res, next) => {
-  const html = RenderClientPage(process.env.NODE_ENV); 
+app.get('*', (req, res, next) => {
+  const html = RenderClientPage(process.env.NODE_ENV);
   res.status(200).end(html);
 });
 
