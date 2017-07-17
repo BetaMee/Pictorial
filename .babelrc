@@ -8,5 +8,10 @@
     "stage-1",
     // 转译React组件为JS代码
     "react"
-  ]
+  ],
+  "env": {
+    "development": {
+        "presets": ["react-hmre"]
+    }
+  }
 }

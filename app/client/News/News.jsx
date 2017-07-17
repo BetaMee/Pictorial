@@ -2,7 +2,7 @@ import React from 'react';
 
 const News = () => (
   <div>
-    Hello News
+    Hello HHh fdsf sdfds 
   </div>
 );
 

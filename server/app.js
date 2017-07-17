@@ -28,7 +28,7 @@ app.enable('trust proxy');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//热加载热替换在开发环境下的配置
+// 热加载热替换在开发环境下的配置
 if (process.env.NODE_ENV === 'development') { // 开发模式下
   const webpackconfig = require('../webpack.config.dev.js');
   const compiler = webpack(webpackconfig);
