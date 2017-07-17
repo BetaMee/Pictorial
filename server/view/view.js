@@ -17,22 +17,21 @@ export const RenderClientPage = (env) => {
           <script src="/devClient.bundle.js"></script>
         </body>
       </html>`;
-  } else {
-    return `
-      <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
-          <meta http-equiv="X-UA-Compatible" content="ie=edge">
-          <title>画报</title>
-        </head>
-        <body>
-          <div id="app"></div>
-          <script src="/devClient.bundle.js"></script>
-        </body>
-      </html>`;
   }
+  return `
+    <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>画报</title>
+      </head>
+      <body>
+        <div id="app"></div>
+        <script src="/devClient.bundle.js"></script>
+      </body>
+    </html>`;
 };
 
 export const RenderManagePage = (env) => {
@@ -51,20 +50,19 @@ export const RenderManagePage = (env) => {
           <script src="/devClient.bundle.js"></script>
         </body>
       </html>`;
-  } else {
-    return `
-      <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
-          <meta http-equiv="X-UA-Compatible" content="ie=edge">
-          <title>画报后台</title>
-        </head>
-        <body>
-          <div id="app"></div>
-          <script src="/devClient.bundle.js"></script>
-        </body>
-      </html>`;
   }
-}
+  return `
+    <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>画报后台</title>
+      </head>
+      <body>
+        <div id="app"></div>
+        <script src="/devClient.bundle.js"></script>
+      </body>
+    </html>`;
+};
