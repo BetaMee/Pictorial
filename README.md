@@ -58,8 +58,9 @@
 
 ## App Progress
 
-- react + react-router + redux，合理设计组件
-- code splitting
+- 集成react + react-router + redux，合理设计组件
+- react-router+webpack实现code splitting
 - 进度条的设计
-- 懒加载，占位符
-- 加入微信账号系统
+- 懒加载，占位符，良好的用户体验
+- 加入微信账号系统，权限认证
+- 页面分享功能
