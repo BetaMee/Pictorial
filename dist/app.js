@@ -48,7 +48,7 @@ app.enable('trust proxy');
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 
-//热加载热替换在开发环境下的配置
+// 热加载热替换在开发环境下的配置
 if (process.env.NODE_ENV === 'development') {
   // 开发模式下
   var webpackconfig = require('../webpack.config.dev.js');
@@ -82,10 +82,9 @@ if (process.env.NODE_ENV === 'development') {
 //   res.sendFile(path.resolve(__dirname, './manage.html'));
 // });
 
-app.get('/', function (req, res, next) {
-  // const html = RenderClientPage(process.env.NODE_ENV);
-  console.log("hhhh");
-  res.status(200).end("aaa");
+app.get('*', function (req, res, next) {
+  var html = (0, _view.RenderClientPage)(process.env.NODE_ENV);
+  res.status(200).end(html);
 });
 
 app.use(function (req, res, next) {

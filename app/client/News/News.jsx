@@ -1,8 +1,8 @@
 import React from 'react';
-import CSSStyles from './News.css';
+// import CSSStyles from './News.css';
 
 const News = () => (
-  <div className={CSSStyles.tab}>
+  <div>
     Hello HHh fdsf
   </div>
 );

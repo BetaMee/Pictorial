@@ -29,7 +29,7 @@ export const RenderClientPage = (env) => {
       </head>
       <body>
         <div id="app"></div>
-        <script src="/devClient.bundle.js"></script>
+        <script src="/client/client.bundle.js"></script>
       </body>
     </html>`;
 };
