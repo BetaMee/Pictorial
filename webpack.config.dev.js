@@ -53,31 +53,31 @@ module.exports = {
           },
         ],
       },
-      // { // 处理图片，name属性是输出的图片文件地址，在output目录下生成图片目录以及文件
-      //   test: /\.(png|jpg|gif|webp')$/,
-      //   //  include:path.resolve(__dirname,'/client/assets'),
-      //   use: [{
-      //     loader: 'url-loader',
-      //     options: {
-      //       limit: 10000,
-      //       name: 'bundleImg/[hash:8].[name].[ext]',
-      //     },
-      //   }],
-      // },
+      { // 处理图片，name属性是输出的图片文件地址，在output目录下生成图片目录以及文件
+        test: /\.(png|jpg|gif|webp')$/,
+        //  include:path.resolve(__dirname,'/client/assets'),
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: 'bundleImg/[hash:8].[name].[ext]',
+          },
+        }],
+      },
 
-      // { // 处理字体
-      //   test: /\.(woff|ttf|svg|eot|woff2)$/,
-      //   //  include:path.resolve(__dirname,'/client/assets'),
-      //   use: [
-      //     {
-      //       loader: 'url-loader',
-      //       options: {
-      //         limit: 10000,
-      //         name: 'bundleFonts/[hash:8]-[name].[ext]',
-      //       },
-      //     },
-      //   ],
-      // },
+      { // 处理字体
+        test: /\.(woff|ttf|svg|eot|woff2)$/,
+        //  include:path.resolve(__dirname,'/client/assets'),
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: 'bundleFonts/[hash:8]-[name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
 
