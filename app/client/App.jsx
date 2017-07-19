@@ -10,7 +10,9 @@ import Bundle from '../lib/bundle';
 
 import Tab from './layout/Tab';
 import News from './News/News';
-import Labs from 'bundle-loader?lazy!./Labs/Labs.jsx';
+import Labs from 'bundle-loader?lazy&name=client-[name]!./Labs/Labs.jsx'; // 按这个格式来，&name=client是指定chunkName的名字，webpack会处理
+// import Labs from './Labs/Labs';
+
 
 const BundleLabs = () => {
   <Bundle load={Labs}>

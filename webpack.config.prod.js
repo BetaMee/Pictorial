@@ -2,20 +2,24 @@ const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 
-const APP_PATH = path.resolve(__dirname, './app/client/App.jsx');
-const BUILD_PATH = path.resolve(__dirname, './build/client');
+const APP_CLIENT_PATH = path.resolve(__dirname, './app/client/App.jsx');
+const APP_MANAGE_PATH = path.resolve(__dirname, './app/manage/App.jsx');
+
+const BUILD_PATH = path.resolve(__dirname, './build/');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 将所有CSS文件打包
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: {
+  entry: { // 多入口
     vendor: ['react', 'react-dom', 'react-router-dom', 'redux'],
+    client: APP_CLIENT_PATH,
+    // manage: APP_MANAGE_PATH,
   },
 
   output: {
     path: BUILD_PATH,
-    filename: 'client.bundle.js',
-    chunkFilename: 'chunk.bundle.js', // 代码分割
+    filename: '[name]/bundle.js',
+    chunkFilename: '[name]/[id]-[name].[chunkhash:4].bundle.js', // 代码分割
     // publicPath: '/JdBus/',
   },
   resolve: {
@@ -80,7 +84,7 @@ module.exports = {
             },
           },
         ],
-      // },
+      },
       // { // 处理图片
       //   test: /\.(png|jpg|gif|webp')$/,
       //   // include:path.resolve(__dirname,'/client/assets'),
@@ -130,13 +134,11 @@ module.exports = {
         collapse_vars: true,
         // 提取出出现多次但是没有定义成变量去引用的静态值
         reduce_vars: true,
-      }
+      },
     }),
     // new ExtractTextPlugin('bundle.css'),
     new webpack.optimize.CommonsChunkPlugin({ // 多页应用拆分打包文件，出现共用文件则打包进common.js中
-      name: 'commons',
-      filename: 'common-[name]-[hash:8].js',
-      minChunks: 2,
+      names: ['vendor', 'manifest'], // Specify the common bundle's name.
     }),
     // new CopyWebpackPlugin([
     //   {
