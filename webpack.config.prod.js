@@ -8,9 +8,9 @@ const BUILD_PATH = path.resolve(__dirname, './build/client');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: [
-    APP_PATH,
-  ],
+  entry: {
+    vendor: ['react', 'react-dom', 'react-router-dom', 'redux'],
+  },
 
   output: {
     path: BUILD_PATH,
@@ -20,14 +20,17 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    mainFields: ['jsnext:main', 'main'], // 优先使用外加包的es6版，如redux
+    modules: [path.resolve(__dirname, 'node_modules')], // 更快的构建
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
+        include: path.resolve(__dirname, 'app'),
         use: [
-          'babel-loader',
+          'babel-loader?cacheDirectory',
         ],
       },
 
@@ -54,28 +57,29 @@ module.exports = {
       //     ],
       //   }),
       // },
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     {
-      //       loader: 'isomorphic-style-loader',
-      //     },
-      //     {
-      //       loader: 'css-loader',
-      //       options: {
-      //         modules: true, // 开启CSS Module
-      //         localIdentName: '[name]__[local]-[hash:base64:5]',
-      //       },
-      //     },
-      //     {
-      //       loader: 'postcss-loader',
-      //       options: {
-      //         plugins() { // 这里配置postcss的插件
-      //           return [autoprefixer];
-      //         },
-      //       },
-      //     },
-      //   ],
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true, // 开启CSS Module
+              localIdentName: '[name]__[local]-[hash:base64:5]',
+              minimize: true, // 压缩
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins() { // 这里配置postcss的插件
+                return [autoprefixer];
+              },
+            },
+          },
+        ],
       // },
       // { // 处理图片
       //   test: /\.(png|jpg|gif|webp')$/,
@@ -112,16 +116,28 @@ module.exports = {
       },
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compressor: {
+      // 最紧凑的输出
+      beautify: false,
+      // 删除所有的注释
+      comments: false,
+      compress: {
+        // 在UglifyJs删除没有用到的代码时不输出警告
         warnings: false,
-      },
+        // 删除所有的 `console` 语句
+        // 还可以兼容ie浏览器
+        drop_console: true,
+        // 内嵌定义了但是只用到一次的变量
+        collapse_vars: true,
+        // 提取出出现多次但是没有定义成变量去引用的静态值
+        reduce_vars: true,
+      }
     }),
     // new ExtractTextPlugin('bundle.css'),
-    // new webpack.optimize.CommonsChunkPlugin({ // 拆分打包文件，出现共用文件则打包进common.js中
-    //   name: 'commons',
-    //   filename: 'commons.js',
-    //   minChunks: 2,
-    // }),
+    new webpack.optimize.CommonsChunkPlugin({ // 多页应用拆分打包文件，出现共用文件则打包进common.js中
+      name: 'commons',
+      filename: 'common-[name]-[hash:8].js',
+      minChunks: 2,
+    }),
     // new CopyWebpackPlugin([
     //   {
     //     from: path.resolve(__dirname, 'build'),
