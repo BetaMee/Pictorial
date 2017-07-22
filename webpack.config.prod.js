@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const APP_CLIENT_PATH = path.resolve(__dirname, './app/client/App.jsx');
 const APP_MANAGE_PATH = path.resolve(__dirname, './app/manage/App.jsx');
@@ -11,16 +12,16 @@ const BUILD_PATH = path.resolve(__dirname, './build/');
 
 module.exports = {
   entry: { // 多入口
-    vendor: ['react', 'react-dom', 'react-router-dom', 'redux'],
     client: APP_CLIENT_PATH,
-    // manage: APP_MANAGE_PATH,
+    manage: APP_MANAGE_PATH,
+    reactlib: ['react', 'react-dom', 'react-router-dom', 'redux'],
   },
 
   output: {
     path: BUILD_PATH,
-    filename: '[name]/bundle.js',
-    chunkFilename: '[name]/[id]-[name].[chunkhash:4].bundle.js', // 代码分割
-    // publicPath: '/JdBus/',
+    filename: '[name]/bundle-[name].js',
+    chunkFilename: 'split/[id]-split-[name].bundle.js', // 代码分割
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -138,8 +139,22 @@ module.exports = {
     }),
     // new ExtractTextPlugin('bundle.css'),
     new webpack.optimize.CommonsChunkPlugin({ // 多页应用拆分打包文件，出现共用文件则打包进common.js中
-      names: ['vendor', 'manifest'], // Specify the common bundle's name.
+      names: ['reactlib', 'manifest'], // 指定公共代码库
+      filename: 'common/common-[name].js', // 指定生成的vendor.js名字，不指定也没系，会使用output的配置
+      minChunks: Infinity, // 保证不会将业务代码打包进第三方中
     }),
+    // // 生成client的html
+    // new HtmlWebpackPlugin({
+    //   title: '画报',
+    //   filename: 'server/view/app.html',
+    //   chunks: ['client', 'reactlib'], // 在entry里我定义过了a这个chunk
+    // }),
+    // // 生成manage的html
+    // new HtmlWebpackPlugin({
+    //   title: '管理后台',
+    //   filename: 'server/view/manage.html',
+    //   chunks: ['manage', 'reactlib'], // 在entry里我定义过了b这个chunk
+    // }),
     // new CopyWebpackPlugin([
     //   {
     //     from: path.resolve(__dirname, 'build'),

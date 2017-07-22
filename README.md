@@ -64,3 +64,8 @@
 - 懒加载，占位符，良好的用户体验
 - 加入微信账号系统，权限认证
 - 页面分享功能
+
+
+## Problem
+
+- babelrc配置中webpack2和babel-node冲突，webpack2原生支持import，在es2015中加上module=false，但是babel node无法转换，打包时应注意。

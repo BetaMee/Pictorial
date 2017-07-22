@@ -29,7 +29,9 @@ export const RenderClientPage = (env) => {
       </head>
       <body>
         <div id="app"></div>
-        <script src="/client/client.bundle.js"></script>
+        <script src="/common/common-manifest.js"></script>                
+        <script src="/common/common-reactlib.js"></script>        
+        <script src="/client/bundle-client.js"></script>
       </body>
     </html>`;
 };

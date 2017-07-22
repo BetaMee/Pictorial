@@ -10,22 +10,22 @@ import Bundle from '../lib/bundle';
 
 import Tab from './layout/Tab';
 import News from './News/News';
-import Labs from 'bundle-loader?lazy&name=client-[name]!./Labs/Labs.jsx'; // 按这个格式来，&name=client是指定chunkName的名字，webpack会处理
+import Labs from 'bundle-loader?lazy&name=[name]!./Labs/Labs.jsx'; // 按这个格式来，&name=client是指定chunkName的名字，webpack会处理
 // import Labs from './Labs/Labs';
 
 
-const BundleLabs = () => {
+const BundleLabs = () => (
   <Bundle load={Labs}>
-    {(BundleLabs) => <BundleLabs />}
+    {(BundleLab) => <BundleLab />}
   </Bundle>
-}
+)
 
 const Root = () => (
   <Router>
     <div>
       <Tab />
       <Route exact path="/" component={News} />
-      <Route path="/labs" component={BundleLabs}  />
+      <Route path="/labs" component={BundleLabs} />
     </div>
   </Router>
 );

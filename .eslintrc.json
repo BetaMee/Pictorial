@@ -25,6 +25,8 @@
         "global-require":"warn",
         "no-underscore-dangle":"off",
         "react/jsx-filename-extension":"off",
-        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+        "import/no-webpack-loader-syntax":"off",
+        "import/no-extraneous-dependencies": "off"
     }
 }
