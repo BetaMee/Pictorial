@@ -36,6 +36,7 @@
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-1": "^6.24.1",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
     "eslint": "^3.17.1",
