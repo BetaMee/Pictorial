@@ -58,7 +58,7 @@
 
 ## App Progress
 
-- 集成react + react-router + redux，合理设计组件
+- <s>集成react + react-router + redux，合理设计组件</s>
 - <s>react-router+webpack实现code splitting</s>
 - 进度条的设计
 - 懒加载，占位符，良好的用户体验
