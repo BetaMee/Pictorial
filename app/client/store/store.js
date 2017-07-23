@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 // 引入根reducer
-import rootReducer from '../reducers/index'; 
+import rootReducer from '../reducers/index';
 
 
 // 调用日志打印
@@ -29,13 +29,6 @@ const configureStore = (preloadedState = {}) => {
     applyMiddleware(...middleware),
   ));
 
-  // 开发环境下的store配置
-  if (process.env.NODE_ENV === 'development' && module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextReducer = rootReducer.default;
-      store.replaceReducer(nextReducer);
-    });
-  }
   return store;
 };
 

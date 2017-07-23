@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 
 const ClientAppPath = path.resolve(__dirname, './app/client/App.jsx'); // 客户端打包路径
-// const ManageAppPath = path.resolve(__dirname, './client/App-Client.jsx'); // 后台打包路径
+const ManageAppPath = path.resolve(__dirname, './app/manage/App.jsx'); // 后台打包路径
 
 module.exports = {
   entry: [
@@ -15,6 +15,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'app/client'), // 与APP_PATH一致的文件目录
     filename: 'devClient.bundle.js',
+    chunkFilename: '[id]-split-[name].bundle.js', // 代码分割
     publicPath: '/',
   },
   resolve: {
