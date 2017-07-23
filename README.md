@@ -61,6 +61,7 @@
 - <s>集成react + react-router + redux，合理设计组件</s>
 - <s>react-router+webpack实现code splitting</s>
 - 进度条的设计
+- 动画
 - 懒加载，占位符，良好的用户体验
 - 加入微信账号系统，权限认证
 - 页面分享功能
