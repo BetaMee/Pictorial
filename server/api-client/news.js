@@ -5,27 +5,27 @@ const router = express.Router();
 // GET /apiclient/getnews 获取新闻信息
 router.get('/', (req, res, next) => {
   let data = [{
-    img: 'hhhh',
+    img: 'http://www.fotor.com/images2/features/photo_effects/e_bw.jpg',
     title: 'hhhhh',
     tags: 'hhhh',
   },
   {
-    img: 'gggg',
+    img: 'http://www.fotor.com/images2/features/photo_effects/e_bw.jpg',
     title: 'gggg',
     tags: 'gggg',
   },
   {
-    img: 'gggg',
+    img: 'http://www.fotor.com/images2/features/photo_effects/e_bw.jpg',
     title: 'gggg',
     tags: 'gggg',
   },
   {
-    img: 'gggg',
+    img: 'http://www.fotor.com/images2/features/photo_effects/e_bw.jpg',
     title: 'gggg',
     tags: 'gggg',
   },
   {
-    img: 'gggg',
+    img: 'http://www.fotor.com/images2/features/photo_effects/e_bw.jpg',
     title: 'gggg',
     tags: 'gggg',
   },

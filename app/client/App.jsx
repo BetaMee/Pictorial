@@ -18,7 +18,7 @@ import Bundle from '../lib/bundle';
 import Tab from './Modules/layout/Tab';
 import Loading from './Modules/layout/Loading';
 // 按这个格式来，&name=client是指定chunkName的名字，webpack会处理
-import News from 'bundle-loader?lazy&name=[name]!./News/views/containers/NewsContainer.jsx';
+import News from 'bundle-loader?lazy&name=[name]!./News/view.jsx';
 import Funs from 'bundle-loader?lazy&name=[name]!./Funs/views/components/Funs.jsx';
 // 全局CSS
 import S from './App.css';

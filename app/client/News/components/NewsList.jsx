@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import S from './NewsList.css';
 
 const NewsList = ({ img, title, tags, isReq }) => (
-  <div>
-    <div>
+  <div className={S.container}>
+    <div className={S.description}>
       <p>{title}</p>
       <p>{tags}</p>
     </div>
-    <div>
+    <div className={S.image}>
       <img src={img} alt="hhh" />
     </div>
   </div>
