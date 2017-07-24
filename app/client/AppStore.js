@@ -1,12 +1,16 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 // 引入中间件
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-// 引入根reducer
-import rootReducer from '../reducers/index';
+// 引入各个子reducer
+import { reducer as NewsReducer } from './News';
 
+const rootReducer = combineReducers({
+  news: NewsReducer,
+  routing: routerReducer,
+});
 
 // 调用日志打印
 const loggerMiddleware = createLogger();

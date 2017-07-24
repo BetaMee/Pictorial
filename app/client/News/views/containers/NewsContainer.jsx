@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 // 获取action
-import { FetchNewsData } from '../../action/news/NewsAction';
+import { FetchNewsData } from '../../actions';
 // 组件
-import News from './News';
+import News from '../components/News';
 
 const mapStateToProps = (state, ownProps) => ({
   news: state.news,

@@ -1,12 +1,9 @@
 import request from 'axios';
-
-/**
- * action 类型
- */
-export const REQUEST_NEWS = 'REQUEST_NEWS';
-export const RECEIVE_NEWS = 'RECEIVE_NEWS';
-export const ERROR_HANDLE = 'ERROR_HANDLE';
-
+import {
+  REQUEST_NEWS,
+  RECEIVE_NEWS,
+  ERROR_HANDLE,
+} from './actionTypes';
 /**
  * action 辅助函数
  */
@@ -26,7 +23,7 @@ const ErrorHandle = msg => ({
  /**
   * action 函数
   */
-export const FetchNewsData = () => (dispatch, getState) => {
+const FetchNewsData = () => (dispatch, getState) => {
   // 先表明正在请求
   dispatch(RequestNewsData());
   return request('/apiclient/getnews')
@@ -42,3 +39,5 @@ export const FetchNewsData = () => (dispatch, getState) => {
       dispatch(ErrorHandle(err.message));
     });
 };
+
+export default FetchNewsData;

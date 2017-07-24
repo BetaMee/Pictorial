@@ -2,13 +2,15 @@ import {
   REQUEST_NEWS,
   RECEIVE_NEWS,
   ERROR_HANDLE,
-} from '../../action/news/NewsAction';
+} from './actionTypes';
 
 const initialState = {
   data: [],
   message: '',
   success: false,
   isReq: false,
+  count: 0,
+  index: 0,
 };
 
 
@@ -22,6 +24,7 @@ const NewsReducer = (state = initialState, action) => {
       });
     case REQUEST_NEWS: // 请求中
       return Object.assign({}, state, {
+        message: '',
         success: false,
         isReq: true,
       });
@@ -35,6 +38,6 @@ const NewsReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default NewsReducer;

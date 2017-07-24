@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
-import NewsList from '../../components/news/NewsList';
+import NewsList from './NewsList';
 // import CSSStyles from './News.css';
 
 class News extends React.Component {
@@ -18,10 +18,10 @@ class News extends React.Component {
 
   render() {
     const { news } = this.props;
-  // data: [],
-  // message: '',
-  // success: false,
-  // isReq: false,
+    // data: [],
+    // message: '',
+    // success: false,
+    // isReq: false,
     if (!news.success && !news.isReq && news.message !== '') { // 不在请求中，且有错误信息
       return (
         <div>
