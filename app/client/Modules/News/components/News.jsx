@@ -18,10 +18,6 @@ class News extends React.Component {
 
   render() {
     const { news } = this.props;
-    // data: [],
-    // message: '',
-    // success: false,
-    // isReq: false,
     if (!news.success && !news.isReq && news.message !== '') { // 不在请求中，且有错误信息
       return (
         <div>
@@ -29,19 +25,26 @@ class News extends React.Component {
         </div>
       );
     }
-
-    const NodeList = news.data.map((data, index) => (
-      <NewsList
-        img={data.img}
-        title={data.title}
-        tags={data.tags}
-        isReq={news.isReq}
-        key={index}
-      />
-    ));
+    if (news.success) {
+      const NodeList = news.data.map((data, index) => (
+        <NewsList
+          img={data.img}
+          title={data.title}
+          tags={data.tags}
+          link={data.link}
+          key={index}
+        />
+      ));
+      return (
+        <div>
+          {NodeList}
+        </div>
+      );
+    }
+    // 其余情况则返回loading状态
     return (
       <div>
-        {NodeList}
+        loading
       </div>
     );
   }

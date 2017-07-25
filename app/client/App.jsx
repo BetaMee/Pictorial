@@ -15,11 +15,11 @@ import configureStore from './AppStore.js';
 import Bundle from '../lib/bundle';
 
 // 组件
-import Tab from './Modules/layout/Tab';
-import Loading from './Modules/layout/Loading';
+import Tab from './Layout/Tab';
+import Loading from './Layout/Loading';
 // 按这个格式来，&name=client是指定chunkName的名字，webpack会处理
-import News from 'bundle-loader?lazy&name=[name]!./News/view.jsx';
-import Funs from 'bundle-loader?lazy&name=[name]!./Funs/views/components/Funs.jsx';
+import News from 'bundle-loader?lazy&name=[name]!./Modules/News/view.jsx';
+import Funs from 'bundle-loader?lazy&name=[name]!./Modules/Funs/views/components/Funs.jsx';
 // 全局CSS
 import S from './App.css';
 

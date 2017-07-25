@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 // 引入各个子reducer
-import { reducer as NewsReducer } from './News';
+import { reducer as NewsReducer } from './Modules/News';
 
 const rootReducer = combineReducers({
   news: NewsReducer,
