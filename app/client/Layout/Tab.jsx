@@ -6,7 +6,7 @@ import S from './Tab.css';
 const Tab = () => (
   <div>
     <ul className={S.ul}>
-      <li><Link to="/news">画报</Link></li>
+      <li><Link to="/news">旧闻</Link></li>
       <li><Link to="/funs">有趣</Link></li>
     </ul>
   </div>

@@ -7,7 +7,7 @@ class NewsList extends React.Component {
     super(props);
     this.state = {
       isImgLoaded: false,
-    }
+    };
   }
 
   loadImg = () => {
