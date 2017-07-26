@@ -6,17 +6,89 @@ Object.defineProperty(exports, "__esModule", {
 /**
  * 生成视图
  */
-var RenderClientPage = exports.RenderClientPage = function RenderClientPage(env) {
+const RenderClientPage = exports.RenderClientPage = env => {
   if (env === 'development') {
-    return '\n      <!DOCTYPE html>\n        <html lang="en">\n        <head>\n          <meta charset="UTF-8">\n          <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">\n          <meta http-equiv="X-UA-Compatible" content="ie=edge">\n          <title>\u753B\u62A5\u6D4B\u8BD5\u9875\u9762</title>\n        </head>\n        <body>\n          <div id="app"></div>\n          <script src="/devClient.bundle.js"></script>\n        </body>\n      </html>';
+    return `<!DOCTYPE html>
+              <html lang="en">
+              <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, user-scalable=no">
+                <title>画报测试页面</title>
+                <style>
+                  body{
+                    margin:0px;
+                    padding:0px;
+                  }
+                </style>
+              </head>
+              <body>
+                <div id="app"></div>
+                <script src="/devClient.bundle.js"></script>
+              </body>
+            </html>`;
   }
-  return '\n    <!DOCTYPE html>\n      <html lang="en">\n      <head>\n        <meta charset="UTF-8">\n        <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">\n        <meta http-equiv="X-UA-Compatible" content="ie=edge">\n        <title>\u753B\u62A5</title>\n      </head>\n      <body>\n        <div id="app"></div>\n        <script src="/common/common-manifest.js"></script>                \n        <script src="/common/common-reactlib.js"></script>        \n        <script src="/client/bundle-client.js"></script>\n      </body>\n    </html>';
+  return `<!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, user-scalable=no">
+              <title>画报</title>
+              <style>
+                body{
+                  margin:0px;
+                  padding:0px;
+                }
+              </style>
+            </head>
+            <body>
+              <div id="app"></div>
+              <script src="/common/common-manifest.js"></script>                
+              <script src="/common/common-reactlib.js"></script>        
+              <script src="/client/bundle-client.js"></script>
+            </body>
+        </html>`;
 };
 
-var RenderManagePage = exports.RenderManagePage = function RenderManagePage(env) {
+const RenderManagePage = exports.RenderManagePage = env => {
   if (env === 'development') {
-    return '\n      <!DOCTYPE html>\n        <html lang="en">\n        <head>\n          <meta charset="UTF-8">\n          <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">\n          <meta http-equiv="X-UA-Compatible" content="ie=edge">\n          <title>\u753B\u62A5\u540E\u53F0\u6D4B\u8BD5\u9875\u9762</title>\n        </head>\n        <body>\n          <div id="app"></div>\n          <script src="/devClient.bundle.js"></script>\n        </body>\n      </html>';
+    return `
+      <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, user-scalable=no">
+          <title>画报后台测试页面</title>
+          <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+          </style>
+        </head>
+        <body>
+          <div id="app"></div>
+          <script src="/devClient.bundle.js"></script>
+        </body>
+      </html>`;
   }
-  return '\n    <!DOCTYPE html>\n      <html lang="en">\n      <head>\n        <meta charset="UTF-8">\n        <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">\n        <meta http-equiv="X-UA-Compatible" content="ie=edge">\n        <title>\u753B\u62A5\u540E\u53F0</title>\n      </head>\n      <body>\n        <div id="app"></div>\n        <script src="/devClient.bundle.js"></script>\n      </body>\n    </html>';
+  return `
+    <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no">
+        <title>画报后台</title>
+        <style>
+          body{
+              margin:0px;
+              padding:0px;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="app"></div>
+        <script src="/devClient.bundle.js"></script>
+      </body>
+    </html>`;
 };
 //# sourceMappingURL=view.js.map

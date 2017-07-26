@@ -1,20 +1,42 @@
+// production下编译node代码使用
+// {
+  // "presets": [
+  //   ["env", {
+  //     "targets": {
+  //       "node": "current"
+  //     }
+  //   }]
+  // ]
+// }
+
+
+
+// production下编译前端代码使用
 {
   "presets": [
     // webpack现在已经支持原生的import语句了, 并且将其运用在tree-shaking特性上
-    // 最终对app打包用
-    // [
-    //   "es2015",
-    //   {
-    //     "modules": false
-    //   }
-    // ],
-    // 开发和对node用
-    "es2015",
-    // 规定JS运用的语言规范层级
-    // Stage 2 是 "草案", 4 是 "已完成", 0 is "稻草人(strawman)"。
-    // 详情查看 https://tc39.github.io/process-document/
+    // ["env", {
+    //   "targets": {
+    //       "browsers": ["last 2 versions"]
+    //   },
+    //   "modules": false,
+    //   "loose": true
+    // }],
+    ["es2015",{
+      "modules": false
+      // "loose": true
+    }],
     "stage-0",
-    // 转译React组件为JS代码
     "react"
   ]
 }
+
+// development下编译前后端代码使用
+// {
+//   "presets": [
+//     // webpack现在已经支持原生的import语句了, 并且将其运用在tree-shaking特性上
+//     ["es2015"],
+//     "stage-0",
+//     "react"
+//   ]
+// }

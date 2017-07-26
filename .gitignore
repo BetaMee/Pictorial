@@ -4,6 +4,7 @@ start.sh
 .avoscloud
 .leancloud
 build/
+dist/
 # VIM
 *~
 *.swp
