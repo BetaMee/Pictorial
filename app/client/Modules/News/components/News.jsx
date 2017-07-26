@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import NewsList from './NewsList';
-// import CSSStyles from './News.css';
+import NewsSlider from './NewsSlider';
 
 class News extends React.Component {
   constructor(props) {
@@ -37,7 +37,18 @@ class News extends React.Component {
       ));
       return (
         <div>
-          {NodeList}
+          <div>
+            <NewsSlider
+              images={[
+                news.data[0].img,
+                news.data[1].img,
+                news.data[2].img,
+              ]}
+            />
+          </div>
+          <div>
+            {NodeList}
+          </div>
         </div>
       );
     }
