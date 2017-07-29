@@ -1,28 +1,50 @@
-.container {
+/*slider-item*/
+.sliderItem {
+  display: inline-block;
+  height: 100%;
+  
+}
+
+.sliderItem img {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+/*slider-item*/
+.sliderDotWarp {
+  z-index: 99;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.sliderDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border: 3px solid #ccc;
+  margin: 6px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.sliderDotSelected {
+  background: #ccc;
+}
+
+.slider {
   width: 100%;
   height: 35vh;
-  position: relative;
   overflow: hidden;
+  position: relative;
+  margin-bottom: 1vh;
 }
-
-
-/*滑动动画*/
-
-@keyframes SliderToRight {
-
-  to {
-    left: 0%;
-  }
+.slider > ul { 
+  position: relative;
+  height: auto;
+  overflow: hidden;
+  left: 0;
+  transition: left 1s;
 }
-
-/* @keyframes SliderToLeft {
-
-} */
-
-.SliderToRight {
-  animation-duration: 1s;
-  animation-name: SliderToRight;
-  animation-timing-function: ease;
-  animation-fill-mode:forwards;
-}
-

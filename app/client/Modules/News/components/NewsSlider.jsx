@@ -1,110 +1,143 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import S from './NewsSlider.css';
 
+const SliderItem = ({ count, item }) => {
+  const width = `${100 / count}%`;
+  return (
+    <li className={S.sliderItem} style={{ width }}>
+      <img src={item.src} alt={item.alt} />
+    </li>
+  );
+};
+
+
+const SliderDots = ({ count, nowLocal }) => {
+  const dotNodes = [];
+  let dotStyle = '';
+  for (let i = 0; i < count; i++) {
+    dotStyle = classNames(S.sliderDot, i === nowLocal ? S.sliderDotSelected : '');
+    dotNodes.push(
+      <span
+        key={`dot${i}`}
+        className={dotStyle}
+      />,
+    );
+  }
+
+  return (
+    <div className={S.sliderDotWarp}>
+      {dotNodes}
+    </div>
+  );
+};
+
+/**
+ * 轮播组件
+ *
+ * @class NewsSlider
+ * @extends {React.Component}
+ */
 class NewsSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startPosX: 0, // 开始距离
-      endPosX: 0, // 终点距离
-      distance: 0, // 移动距离
-      containerWith: 0, // 容器元素宽度
-
-      SliderToRight: false,
-      SliderToLeft: false,
+      nowLocal: 0,
     };
   }
 
   componentDidMount() {
-    console.log(this.div.clientWidth);
-    this.setState({
-      containerWith: this.div.clientWidth,
-    });
+    this.goPlay();
   }
 
-  touchMove = (e) => {
-     // 判断默认行为是否可以被禁用
-    if (e.cancelable) {
-      // 判断默认行为是否已经被禁用
-      if (!e.defaultPrevented) {
-        e.preventDefault();
-      }
+  componentWillUnmount() {
+    clearInterval(this.autoPlayFlag);
+  }
+
+  // 向前向后多少
+  turn = (n) => {
+    const { items } = this.props;
+    let _n = this.state.nowLocal + n;
+    if (_n < 0) {
+      _n += items.length;
     }
-    const targetTouch = e.targetTouches[0];
-    const endPosX = targetTouch.clientX;
-    this.setState({
-      endPosX: endPosX,
-      distance: endPosX - this.state.startPosX,
-    });
-  } 
-
-  touchStart = (e) => {
-    const targetTouch = e.targetTouches[0];
-    this.setState({
-      SliderToRight: false,
-      startPosX: targetTouch.clientX,
-    });
+    if (_n >= items.length) {
+      _n -= items.length;
+    }
+    this.setState({ nowLocal: _n });
   }
-
-  touchEnd = (e) => {
-    if (this.state.distance < 0 && Math.abs(this.state.distance ) < 0.5 * this.state.containerWith) {
-      this.setState({
-        SliderToRight: true,
-      }); 
+  // 开始自动轮播
+  goPlay = () => {
+    const { autoplay, delay } = this.props;
+    if (autoplay) {
+      this.autoPlayFlag = setInterval(() => {
+        this.turn(1);
+      }, delay * 1000);
     }
   }
-
+  // 暂停自动轮播
+  pausePlay = () => {
+    clearInterval(this.autoPlayFlag);
+  }
   render() {
-    const { images } = this.props;
-    const Styles = [
-      {
-        position: 'absolute',
-        backgroundImage: `url(${images[0]})`,
-        backgroundPosition: 'center',
-        width: '100%',
-        height: '100%',
-        left: `${this.state.distance}px`,
-        index: 99,
-      },
-      {
-        display: 'none',
-        position: 'absolute',
-        backgroundImage: `url(${images[1]})`,
-        backgroundPosition: 'center',
-        width: '100%',
-        height: '100%',
-      },
-      {
-        display: 'none',
-        position: 'absolute',
-        backgroundImage: `url(${images[2]})`,
-        backgroundPosition: 'center',
-        width: '100%',
-        height: '100%',
-      },
-    ];
-
+    const { items, dots, speed } = this.props;
+    const count = items.length;
+    const itemNodes = items.map((item, idx) => (
+      <SliderItem
+        item={item}
+        count={count}
+        key={`item${idx}`}
+      />
+    ));
+    const dotsNode = <SliderDots count={count} nowLocal={this.state.nowLocal} />;
     return (
-      <div
-        className={S.container}
-        ref={(div) => { this.div = div; }}
-      >
-        <div
-          style={Styles[0]}
-          onTouchStart={this.touchStart}
-          onTouchMove={this.touchMove}
-          onTouchEnd={this.touchEnd}
-          className={this.state.SliderToRight ? S.SliderToRight : ''}
-        />
+      <div className={S.slider}>
+        <ul
+          style={{
+            left: `${-100 * this.state.nowLocal}%`,
+            transitionDuration: `${speed}s`,
+            width: `${items.length * 100}%`,
+            margin: 0,
+            padding: 0,
+            height: '100%',
+          }}
+        >
+          {itemNodes}
+        </ul>
+        {dots ? dotsNode : null}
       </div>
     );
   }
 }
 
-NewsSlider.propTypes = {
-  images: PropTypes.array.isRequired,
+
+SliderItem.propTypes = {
+  count: PropTypes.number.isRequired,
+  item: PropTypes.object.isRequired,
 };
+
+SliderDots.propTypes = {
+  count: PropTypes.number.isRequired,
+  nowLocal: PropTypes.number.isRequired,
+};
+
+NewsSlider.propTypes = {
+  items: PropTypes.array.isRequired,
+  dots: PropTypes.bool.isRequired,
+  speed: PropTypes.number.isRequired,
+  autoplay: PropTypes.bool.isRequired,
+  delay: PropTypes.number.isRequired,
+};
+
+NewsSlider.defaultProps = {
+  speed: 1,
+  delay: 5,
+  autoplay: true,
+  dots: true,
+  items: [],
+};
+NewsSlider.autoPlayFlag = null;
+
 
 export default NewsSlider;

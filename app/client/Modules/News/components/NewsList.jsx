@@ -17,7 +17,7 @@ class NewsList extends React.Component {
   }
 
   render() {
-    const { img, title, tags, link } = this.props;
+    const { src, title, tags, link } = this.props;
     return (
       <div className={S.container}>
         <a href={link}>
@@ -26,7 +26,7 @@ class NewsList extends React.Component {
             <p>{tags}</p>
           </div>
           <div className={S.image}>
-            <img src={img} alt="hhh" onLoad={this.loadImg} />
+            <img src={src} alt="hhh" onLoad={this.loadImg} />
             <div className={this.state.isImgLoaded ? S.imgHidden : S.imgShow} />
           </div>
         </a>
@@ -36,7 +36,7 @@ class NewsList extends React.Component {
 }
 
 NewsList.propTypes = {
-  img: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   tags: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
