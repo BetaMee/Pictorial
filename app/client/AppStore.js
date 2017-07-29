@@ -6,9 +6,11 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 // 引入各个子reducer
 import { reducer as NewsReducer } from './Modules/News';
+import { reducer as FunsReducer } from './Modules/Funs';
 
 const rootReducer = combineReducers({
   news: NewsReducer,
+  funs: FunsReducer,
   routing: routerReducer,
 });
 

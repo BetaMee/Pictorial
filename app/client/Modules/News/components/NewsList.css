@@ -1,6 +1,6 @@
 .container {
   height: 15vh;
-  padding-bottom: 1vh; 
+  border-bottom: 1vh solid #f2f2f2;
 }
 .container a {
   display: block;

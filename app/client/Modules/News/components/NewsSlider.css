@@ -2,7 +2,6 @@
 .sliderItem {
   display: inline-block;
   height: 100%;
-  
 }
 
 .sliderItem img {
@@ -39,7 +38,7 @@
   height: 35vh;
   overflow: hidden;
   position: relative;
-  margin-bottom: 1vh;
+  border-bottom: 1vh solid #f2f2f2;
 }
 .slider > ul { 
   position: relative;

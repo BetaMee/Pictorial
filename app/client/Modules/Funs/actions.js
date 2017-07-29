@@ -1,38 +1,39 @@
 import request from 'axios';
 import {
-  REQUEST_NEWS,
-  RECEIVE_NEWS,
-  ERROR_NEWS,
+  REQUEST_FUNS,
+  RECEIVE_FUNS,
+  ERROR_FUNS,
 } from './actionTypes';
+
 /**
  * action 辅助函数
  */
-const RequestNewsData = () => ({
-  type: REQUEST_NEWS,
+const RequestFunsData = () => ({
+  type: REQUEST_FUNS,
 });
 
-const ReceiveNewsData = news => ({
-  type: RECEIVE_NEWS,
-  data: news,
+const ReceiveFunsData = funs => ({
+  type: RECEIVE_FUNS,
+  data: funs,
 });
 
 const ErrorHandle = msg => ({
-  type: ERROR_NEWS,
+  type: ERROR_FUNS,
   errMsg: msg,
 });
  /**
   * action 函数
   */
-const FetchNewsData = () => (dispatch, getState) => {
+const FetchFunsData = () => (dispatch, getState) => {
   // 先表明正在请求
-  dispatch(RequestNewsData());
-  return request('/apiclient/getnews')
+  dispatch(RequestFunsData());
+  return request('/apiclient/getfuns')
     .then(res => res.data)
     .then((data) => {
       if (!data.success) {
         dispatch(ErrorHandle(data.message));
       } else {
-        dispatch(ReceiveNewsData(data.news));
+        dispatch(ReceiveFunsData(data.funs));
       }
     })
     .catch((err) => {
@@ -40,4 +41,4 @@ const FetchNewsData = () => (dispatch, getState) => {
     });
 };
 
-export default FetchNewsData;
+export default FetchFunsData;
