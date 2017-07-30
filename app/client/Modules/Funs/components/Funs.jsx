@@ -1,15 +1,16 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
+// 组件
 import FunsList from './FunsList';
-
-
-const Topic = () => (
-  <div>
-    <h3>hhhhh</h3>
-  </div>
-);
+import ComponentLoading from '../../Common/CompoentLoading';
+import Voice from 'bundle-loader?lazy&name=[name]!../../Voice/view.js';
+// 样式
+import S from './Funs.css';
+// 代码分割
+import createModule from '../../../../lib/createModule.js';
+import WrapGasket from '../../Common/WrapGasket';
 
 class Funs extends React.Component {
   constructor(props) {
@@ -23,7 +24,6 @@ class Funs extends React.Component {
 
   render() {
     const { funs, match, location } = this.props;
-    console.log(location);
     const funsItems = funs.data;
     if (!funs.success && !funs.isReq && funs.message !== '') { // 不在请求中，且有错误信息
       return (
@@ -44,22 +44,33 @@ class Funs extends React.Component {
           key={`funskey-${index}`}
         />
       ));
+      console.log(S.slideInRight);
       return (
-        <div>
+        <div className={S.container}>
           {funsNode}
-
-            <Route
-              path={`${match.path}/voice/:voiceId`}
-              component={Topic}
-            />
-            <Route
-              path={`${match.path}/guess/:guessId`}
-              component={Topic}
-            />
-            <Route
-              path={`${match.path}/vote/:voteId`}
-              component={Topic}
-            />
+          <TransitionGroup>
+            <CSSTransition
+              classNames={{
+                // appear: S.slideInRight,
+                // appearActive: S.slideInRight,
+                enter: S.slideInRight,
+                enterActive: S.slideInRight,
+                exit: S.slideOutRight,
+                exitActive: S.slideOutRight,
+              }}
+              key={location.pathname}
+              timeout={5000}
+              mountOnEnter
+              unmountOnExit
+            >
+              <Route
+                path={`${match.path}/voice/:voiceId`}
+                location={location}
+                key={location.key}
+                component={WrapGasket(createModule(Voice, ComponentLoading))}
+              />
+            </CSSTransition>
+          </TransitionGroup>
         </div>
       );
     }
@@ -77,6 +88,7 @@ Funs.propTypes = {
   fetchFunsData: PropTypes.func.isRequired,
   funs: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 export default Funs;

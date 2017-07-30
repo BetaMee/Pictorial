@@ -1,0 +1,41 @@
+.container{
+  position: relative;
+  overflow: hidden;
+}
+
+/*子组件动画*/
+@keyframes slideInRight {
+  from {
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+
+
+.slideInRight {
+  animation-name: slideInRight;
+}
+
+.slideOutRight {
+  animation-name: slideOutRight;
+}
+
+.routeTransition {
+  width: 100%;
+}

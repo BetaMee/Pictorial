@@ -11,12 +11,11 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 import configureStore from './AppStore.js';
-// 使用react-router的代码分割
-import Bundle from '../lib/bundle';
+import createModule from '../lib/createModule.js'; // 创造代码分割模块
 
 // 组件
 import Tab from './Layout/Tab';
-import Loading from './Layout/Loading';
+import GlobalLoading from './Layout/GlobalLoading';
 // 按这个格式来，&name=client是指定chunkName的名字，webpack会处理
 import News from 'bundle-loader?lazy&name=[name]!./Modules/News/view.js';
 import Funs from 'bundle-loader?lazy&name=[name]!./Modules/Funs/view.js';
@@ -25,15 +24,15 @@ import S from './App.css';
 
 const history = createBrowserHistory();
 
-/**
- * code spliting
- * @param {*} Component
- */
-const createModule = Component => () => (
-  <Bundle load={Component}>
-    {Mod => (Mod ? <Mod /> : <Loading />)}
-  </Bundle>
-);
+// /**
+//  * code spliting
+//  * @param {*} Component
+//  */
+// const createModule = Component => () => (
+//   <Bundle load={Component}>
+//     {Mod => (Mod ? <Mod /> : <Loading />)}
+//   </Bundle>
+// );
 
 const Root = () => (
   <Provider store={configureStore()}>
@@ -47,8 +46,8 @@ const Root = () => (
             <Redirect to="/news" />
           )}
         />
-        <Route path="/news" component={createModule(News)} />
-        <Route path="/funs" component={createModule(Funs)} />
+        <Route path="/news" component={createModule(News, GlobalLoading)} />
+        <Route path="/funs" component={createModule(Funs, GlobalLoading)} />
       </div>
     </ConnectedRouter>
   </Provider>
