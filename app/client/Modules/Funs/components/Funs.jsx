@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // 组件
 import FunsList from './FunsList';
 import ComponentLoading from '../../Common/CompoentLoading';
-import Voice from 'bundle-loader?lazy&name=[name]!../../Voice/view.js';
+import Voice from 'bundle-loader?lazy&name=voice-[name]!../../Voice/view.js';
 // 样式
 import S from './Funs.css';
 // 代码分割
@@ -51,15 +51,13 @@ class Funs extends React.Component {
           <TransitionGroup>
             <CSSTransition
               classNames={{
-                // appear: S.slideInRight,
-                // appearActive: S.slideInRight,
                 enter: S.slideInRight,
                 enterActive: S.slideInRight,
                 exit: S.slideOutRight,
                 exitActive: S.slideOutRight,
               }}
               key={location.pathname}
-              timeout={5000}
+              timeout={1000}
               mountOnEnter
               unmountOnExit
             >
