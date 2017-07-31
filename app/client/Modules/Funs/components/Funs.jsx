@@ -44,9 +44,8 @@ class Funs extends React.Component {
           key={`funskey-${index}`}
         />
       ));
-      console.log(S.slideInRight);
       return (
-        <div className={S.container}>
+        <div>
           {funsNode}
           <TransitionGroup>
             <CSSTransition
@@ -56,8 +55,8 @@ class Funs extends React.Component {
                 exit: S.slideOutRight,
                 exitActive: S.slideOutRight,
               }}
-              key={location.pathname}
-              timeout={1000}
+              key={location.key}
+              timeout={10000}
               mountOnEnter
               unmountOnExit
             >

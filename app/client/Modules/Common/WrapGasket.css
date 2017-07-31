@@ -3,9 +3,10 @@
   top:0;
   width:100%;
   min-height: 100vh;
+  background-color: white;
 }
 
 .animated {
-  animation-duration: 1s;
+  animation-duration: 0.8s;
   animation-fill-mode: both;
 }
