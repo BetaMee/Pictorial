@@ -1,6 +1,6 @@
 import React from 'react';
 // 使用react-router的代码分割
-import Bundle from '../lib/bundle';
+import Bundle from './bundle';
 
 /**
  * code spliting
