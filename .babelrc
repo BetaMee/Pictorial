@@ -1,35 +1,35 @@
 // production下编译node代码使用
-{
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": "current"
-      }
-    }]
-  ]
-}
+// {
+//   "presets": [
+//     ["env", {
+//       "targets": {
+//         "node": "current"
+//       }
+//     }]
+//   ]
+// }
 
 
 
 // production下编译前端代码使用
-// {
-//  "presets": [
-//    // webpack现在已经支持原生的import语句了, 并且将其运用在tree-shaking特性上
-//    // ["env", {
-//    //   "targets": {
-//    //       "browsers": ["last 2 versions"]
-//    //   },
-//    //   "modules": false,
-//    //   "loose": true
-//    // }],
-//    ["es2015",{
-//      "modules": false
-//      // "loose": true
-//    }],
-//    "stage-0",
-//    "react"
-//  ]
-// }
+{
+ "presets": [
+   // webpack现在已经支持原生的import语句了, 并且将其运用在tree-shaking特性上
+   // ["env", {
+   //   "targets": {
+   //       "browsers": ["last 2 versions"]
+   //   },
+   //   "modules": false,
+   //   "loose": true
+   // }],
+   ["es2015",{
+     "modules": false
+     // "loose": true
+   }],
+   "stage-0",
+   "react"
+ ]
+}
 
 // development下编译前后端代码使用
 //  {
