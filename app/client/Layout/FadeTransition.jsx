@@ -1,7 +1,8 @@
 import React from 'react';
 import { Transition } from 'react-transition-group';
+import { Route } from 'react-router-dom';
 
-const duration = 30000;
+const duration = 800;
 
 const defaultStyle = {
   transition: `opacity ${duration}ms ease-in-out`,
@@ -15,48 +16,26 @@ const transitionStyles = {
   exited: { opacity: 0 },
 };
 
-// const WrapFadeTransition = ({ children, in: inProp }) => (
-//   <Transition
-//     in={inProp}
-//     timeout={{
-//       enter: duration,
-//       exit: duration,
-//     }}
-//   >
-//     {(state) => {
-//       console.log(inProp);
-//       if (state === 'exited') {
-//         return null;
-//       }
-//       const currentStyles = transitionStyles[state];
-//       return React.cloneElement(children, {
-//         style: Object.assign({}, defaultStyle, currentStyles),
-//       });
-//     }}
-//   </Transition>
-// );
 
-// export default FadeTransition;
-
-
-const WrapFadeTransition = WrapComponent => ({ children, in: inProp }) => (
-  <Transition
-    in={inProp}
-    timeout={{
-      enter: duration,
-      exit: duration,
-    }}
-  >
-    {(state) => {
-      console.log(inProp);
-      if (state === 'exited') {
-        return null;
-      }
-      const currentStyles = transitionStyles[state];
-      return <WrapComponent style={Object.assign({}, defaultStyle, currentStyles)} />;
-    }}
-  </Transition>
+const FadeTransition = ({ children, path, component:Component }) => (
+  <Route
+    path={path}
+    children={({ match, ...rest }) => (
+      <Transition
+        in={match !== null} // 判断是否发生匹配
+        timeout={{
+          enter: duration,
+          exit: duration,
+        }}
+      >
+        {state => (
+          <div style={Object.assign({}, defaultStyle, transitionStyles[state])}>
+            { state === 'exited' ? null : <Component match={match} {...rest} />}
+          </div>
+        )}
+      </Transition>
+    )}
+  />
 );
 
-export default WrapFadeTransition;
-
+export default FadeTransition;

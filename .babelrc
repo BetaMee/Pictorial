@@ -1,13 +1,13 @@
 // production下编译node代码使用
-{
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": "current"
-      }
-    }]
-  ]
-}
+// {
+//   "presets": [
+//     ["env", {
+//       "targets": {
+//         "node": "current"
+//       }
+//     }]
+//   ]
+// }
 
 
 
@@ -32,11 +32,11 @@
 // }
 
 // development下编译前后端代码使用
-//  {
-//    "presets": [
-//      // webpack现在已经支持原生的import语句了, 并且将其运用在tree-shaking特性上
-//      ["es2015"],
-//      "stage-0",
-//      "react"
-//    ]
-//  }
+ {
+   "presets": [
+     // webpack现在已经支持原生的import语句了, 并且将其运用在tree-shaking特性上
+     ["es2015"],
+     "stage-0",
+     "react"
+   ]
+ }

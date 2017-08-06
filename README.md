@@ -1,6 +1,11 @@
 ## 一个画报app应用
 
-一个小小的单页应用
+一个小小的单页应用（完善中）
+
+## demo
+
+
+
 
 ## Technology Stack
 
@@ -9,7 +14,7 @@
 - [React](https://github.com/facebook/react)
 - [React Router 4](https://reacttraining.com/react-router/)
 - [Redux](https://github.com/reactjs/redux)
-- [React Router Reudex]()
+- [React Router Redux]()
 - [PostCSS]()
 - [CSS Modules]()
 

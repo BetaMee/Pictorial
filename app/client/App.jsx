@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-  // BrowserRouter as Router,
   Route,
   Redirect,
 } from 'react-router-dom';
@@ -19,6 +18,8 @@ import GlobalLoading from './Layout/GlobalLoading';
 // 按这个格式来，&name=client是指定chunkName的名字，webpack会处理
 import News from 'bundle-loader?lazy&name=news-[name]!./Modules/News/view.js';
 import Funs from 'bundle-loader?lazy&name=funs-[name]!./Modules/Funs/view.js';
+// 动画组件
+import FadeTransition from './Layout/FadeTransition';
 // 全局CSS
 import S from './App.css';
 
@@ -46,8 +47,8 @@ const Root = () => (
             <Redirect to="/news" />
           )}
         />
-        <Route path="/news" component={createModule(News, GlobalLoading)} />
-        <Route path="/funs" component={createModule(Funs, GlobalLoading)} />
+        <FadeTransition path="/news" component={createModule(News, GlobalLoading)} />
+        <FadeTransition path="/funs" component={createModule(Funs, GlobalLoading)} />
       </div>
     </ConnectedRouter>
   </Provider>
