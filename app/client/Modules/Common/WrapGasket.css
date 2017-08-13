@@ -1,12 +1,15 @@
 .container {
-  position: absolute;
+  position: fixed;
   top:0;
   width:100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden; 
   background-color: white;
+  box-shadow: -4px 0px 5px hsla(0,0%,0%,0.4);
 }
 
 .animated {
-  animation-duration: 0.5s;
+  animation-duration: 0.8s;
   animation-fill-mode: both;
 }

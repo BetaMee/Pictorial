@@ -6,10 +6,18 @@ class Voice extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+  }
+
+  componentWillUnmount() {
+    document.getElementsByTagName('body')[0].style.overflow = 'auto';
+  }
+
   render() {
     return (
-      <div>
-        voice
+      <div style={{height:'1200px'}}>
+        gfdglkfdgk
       </div>
     );
   }

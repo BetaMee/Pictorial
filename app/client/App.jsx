@@ -25,15 +25,6 @@ import S from './App.css';
 
 const history = createBrowserHistory();
 
-// /**
-//  * code spliting
-//  * @param {*} Component
-//  */
-// const createModule = Component => () => (
-//   <Bundle load={Component}>
-//     {Mod => (Mod ? <Mod /> : <Loading />)}
-//   </Bundle>
-// );
 
 const Root = () => (
   <Provider store={configureStore()}>

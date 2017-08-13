@@ -22,6 +22,9 @@ class Funs extends React.Component {
     fetchFunsData();
   }
 
+  handleClick = (e) => {
+    console.log('ddd');
+  }
   render() {
     const { funs, match, location } = this.props;
     const funsItems = funs.data;
@@ -56,7 +59,7 @@ class Funs extends React.Component {
                 exitActive: S.slideOutRight,
               }}
               key={location.key}
-              timeout={10000}
+              timeout={800}
               mountOnEnter
               unmountOnExit
             >
