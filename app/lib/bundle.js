@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 class Bundle extends React.Component {
@@ -40,8 +40,8 @@ class Bundle extends React.Component {
 
 
 Bundle.propTypes = {
-  load: PropTypes.func,
-  children: PropTypes.func,
+  load: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired,
 };
 
 export default Bundle;
