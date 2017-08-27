@@ -3,13 +3,13 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 
 const ClientAppPath = path.resolve(__dirname, './app/client/App.jsx'); // 客户端打包路径
-const ManageAppPath = path.resolve(__dirname, './app/manage/App.jsx'); // 后台打包路径
+const ManageAppPath = path.resolve(__dirname, './app/dashboard/App.jsx'); // 后台打包路径
 
 module.exports = {
   entry: [
     'webpack-hot-middleware/client', // 热加载中间件
-    ClientAppPath,
-    // ManageAppPath,
+    // ClientAppPath,
+    ManageAppPath,
   ],
   // output.publicPath 表示资源的发布地址，当配置过该属性后，打包文件中所有通过相对路径引用的资源都会被配置的路径所替换
   output: {
