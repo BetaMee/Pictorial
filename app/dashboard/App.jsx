@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-  BrowserRouter as Router,
   Route,
+  Switch,
+  Redirect,
 } from 'react-router-dom';
 
 // redux
@@ -13,10 +14,13 @@ import configureStore from './AppStore.js';
 import createModule from '../lib/createModule.js'; // 创造代码分割模块
 
 // 组件
-import Panel from './Layout/Panel';
-import Header from './Layout/Header';
+import NavPanel from './Layout/NavPanel';
+import Appbar from './Layout/Appbar';
+import News from './Modules/News/view.js';
+import NoMatch from './Layout/NoMatch';
 
 // 样式
+import './styles/base.css';
 import S from './App.css';
 
 const history = createBrowserHistory();
@@ -25,22 +29,29 @@ const Root = () => (
   <Provider store={configureStore()}>
     <ConnectedRouter history={history}>
       <div className={S.base}>
-        <div className={S.panel}>
-          <Panel />
-        </div>
+        <NavPanel />
         <div className={S.main}>
-          <Header />
+          <Appbar />
+          <Switch>
+            <Route
+              exact
+              path="/dashboard"
+              render={() => (
+                <Redirect to="/dashboard/news" />
+              )}
+            />
+            <Route path="/dashboard/news" component={News} />
+            <Route path="/dashboard/voice" component={NoMatch} />
+            <Route path="/dashboard/vote" component={NoMatch} />
+            <Route path="/dashboard/guess" component={NoMatch} />
+            <Route component={NoMatch} />
+          </Switch>
         </div>
       </div>
     </ConnectedRouter>
   </Provider>
 );
 
-// const Root = () => (
-//   <div className={S.base}>
-//     Hello World
-//   </div>
-// );
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept();

@@ -9,12 +9,6 @@ export const RenderClientPage = (env) => {
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, user-scalable=no">
                 <title>画报测试页面</title>
-                <style>
-                  body{
-                    margin:0px;
-                    padding:0px;
-                  }
-                </style>
               </head>
               <body>
                 <div id="app"></div>
@@ -28,12 +22,6 @@ export const RenderClientPage = (env) => {
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, user-scalable=no">
               <title>画报</title>
-              <style>
-                body{
-                  margin:0px;
-                  padding:0px;
-                }
-              </style>
             </head>
             <body>
               <div id="app"></div>
@@ -53,12 +41,6 @@ export const RenderManagePage = (env) => {
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, user-scalable=no">
           <title>画报后台测试页面</title>
-          <style>
-            body{
-                margin:0px;
-                padding:0px;
-            }
-          </style>
         </head>
         <body>
           <div id="app"></div>
@@ -73,12 +55,6 @@ export const RenderManagePage = (env) => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,user-scalable=no">
         <title>画报后台</title>
-        <style>
-          body{
-              margin:0px;
-              padding:0px;
-          }
-        </style>
       </head>
       <body>
         <div id="app"></div>

@@ -1,0 +1,48 @@
+.container {
+  width:20%;
+  height: 100%;
+}
+
+.header {
+  height: 20%;
+  background-color:rgb(34, 34, 34);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  background-image: url('../../images/LOGO.png');
+  background-size: 100% 100%;
+  width: 80px;
+  height: 80px;
+}
+
+.menu {
+  margin: 0;
+  height: 80%;
+  background-color: #2d2d2d;
+  padding-left: 0px;
+  padding-top: 1.2rem;
+}
+.menu a {
+  display: block;
+  text-decoration: none;
+}
+
+.menu li {
+  list-style: none;
+  height: 3.5rem;
+  line-height:3.5rem;
+  padding-left: 0px;
+  text-align: center;
+  color:rgb(170, 170, 170);
+  font-size: 1.2rem;
+}
+
+.menu li:hover {
+  background-color: #FAFAFA;
+  border-left: .3rem solid #E57373;
+  color: rgb(34, 34, 34);
+  cursor: pointer;
+}
