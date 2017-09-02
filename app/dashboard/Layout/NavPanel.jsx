@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 // 样式
 import S from './NavPanel.css';
@@ -9,11 +9,12 @@ const NavPanel = () => (
     <header className={S.header}>
       <div className={S.logo} />
     </header>
+    <p className={S.title}>内容配置</p>
     <ul className={S.menu}>
-      <Link to="/dashboard"><li>配置-新闻</li></Link>
-      <Link to="/dashboard/voice"><li>配置-Voice</li></Link>
-      <Link to="/dashboard/vote"><li>配置-Vote</li></Link>
-      <Link to="/dashboard/guess"><li>配置-Guess</li></Link>
+      <li><NavLink activeClassName={S.menuactive} to="/dashboard/news">新闻</NavLink></li>
+      <li><NavLink activeClassName={S.menuactive} to="/dashboard/voice">Voice</NavLink></li>
+      <li><NavLink activeClassName={S.menuactive} to="/dashboard/vote">Vote</NavLink></li>
+      <li><NavLink activeClassName={S.menuactive} to="/dashboard/guess">Guess</NavLink></li>
     </ul>
   </div>
 );
