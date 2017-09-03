@@ -1,0 +1,38 @@
+.container {
+  width:100%;
+  height: 90%;
+}
+
+/*拖拽*/
+.dropcover {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropzone {
+  width: 80%;
+  height: 80%;
+  border: 2px dashed #bdbdbd;
+}
+
+
+.setzone {
+  width: 100%;
+  height: 70%;
+  padding: 2rem 3rem;
+}
+
+.dropzone div {
+  width: 20%;
+  height: 100%;
+  padding: 10px;
+}
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px; 
+}
