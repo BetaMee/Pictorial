@@ -1,17 +1,20 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 // 获取action
-import FetchNewsData from './actions.js';
+import { PostHeadline, GetHeadline } from './actions.js';
 // 组件
 import News from './components/News';
 
 const mapStateToProps = (state, ownProps) => ({
-  // news: state.news,
+  news: state.news,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchNewsData: () => {
-    dispatch(FetchNewsData());
+  postHeadline: (headline) => {
+    dispatch(PostHeadline(headline));
+  },
+  getHeadline: () => {
+    dispatch(GetHeadline());
   },
 });
 

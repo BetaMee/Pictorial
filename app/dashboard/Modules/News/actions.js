@@ -1,43 +1,79 @@
 import request from 'axios';
+
 import {
-  REQUEST_NEWS,
-  RECEIVE_NEWS,
-  ERROR_NEWS,
+  REQUEST_GET_HEADLINE,
+  RECEIVE_GET_HEADLINE,
+  ERROR_GET_HEADLINE,
+
+  REQUEST_HEADLINE,
+  RECEIVE_HEADLINE,
+  ERROR_HEADLINE,
 } from './actionTypes';
-/**
- * action 辅助函数
- */
-const RequestNewsData = () => ({
-  type: REQUEST_NEWS,
+
+
+// POST接口
+const RequestPostHeadline = () => ({
+  type: REQUEST_HEADLINE,
 });
 
-const ReceiveNewsData = news => ({
-  type: RECEIVE_NEWS,
-  data: news,
+const ReceiveHeadLine = headline => ({
+  type: RECEIVE_HEADLINE,
+  data: headline,
 });
 
-const ErrorHandle = msg => ({
-  type: ERROR_NEWS,
-  errMsg: msg,
+
+const ErrorHeadlineHandle = msg => ({
+  type: ERROR_HEADLINE,
+  msg,
 });
- /**
-  * action 函数
-  */
-const FetchNewsData = () => (dispatch, getState) => {
-  // 先表明正在请求
-  dispatch(RequestNewsData());
-  return request('/apiclient/getnews')
+
+
+const PostHeadline = headline => (dispatch, getState) => {
+  // 先请求
+  dispatch(RequestPostHeadline());
+  return request.post('/apimanage/postnews/headline', headline)
     .then(res => res.data)
     .then((data) => {
       if (!data.success) {
-        dispatch(ErrorHandle(data.message));
+        dispatch(ErrorHeadlineHandle(data.message));
       } else {
-        dispatch(ReceiveNewsData(data.news));
+        dispatch(ReceiveHeadLine(data.data));
       }
     })
     .catch((err) => {
-      dispatch(ErrorHandle(err.message));
+      dispatch(ErrorHeadlineHandle(err.message));
     });
 };
 
-export default FetchNewsData;
+// GET 接口
+const RequestGetHeadline = () => ({
+  type: REQUEST_GET_HEADLINE,
+});
+
+const ReceiveGetHeadLine = headline => ({
+  type: RECEIVE_GET_HEADLINE,
+  data: headline,
+});
+
+const ErrorGetHeadline = msg => ({
+  type: ERROR_GET_HEADLINE,
+  msg,
+});
+
+const GetHeadline = () => (dispatch, getState) => {
+  dispatch(RequestGetHeadline());
+  return request.get('/apiclient/getnews/headline')
+    .then(res => res.data)
+    .then((data) => {
+      if (!data.success) {
+        dispatch(ErrorGetHeadline(data.message));
+      } else {
+        dispatch(ReceiveGetHeadLine(data.data));
+      }
+    })
+    .catch((err) => {
+      dispatch(ErrorGetHeadline(err.message));
+    });
+};
+
+export { PostHeadline, GetHeadline };

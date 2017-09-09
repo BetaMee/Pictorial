@@ -8,6 +8,7 @@ import webpack from 'webpack';
 import { RenderClientPage, RenderManagePage } from './view/view';
 // Client路由
 import ClientAppRoute from './api-client/index';
+import DashboardRoute from './api-manage/index';
 
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
 // require('./cloud/cloud.js');
@@ -52,7 +53,7 @@ if (process.env.NODE_ENV === 'development') { // 开发模式下
 
 
 ClientAppRoute(app);
-
+DashboardRoute(app);
 
 app.get('/dashboard', (req, res, next) => {
   const html = RenderManagePage(process.env.NODE_ENV);

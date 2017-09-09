@@ -1,6 +1,10 @@
 import express from 'express';
+import AV from 'leanengine';
+
 
 const router = express.Router();
+// 查询头条信息
+const queryHeadline = AV.Query('Headline');
 
 // GET /apiclient/getnews 获取新闻信息
 router.get('/', (req, res, next) => {
@@ -99,6 +103,36 @@ router.get('/', (req, res, next) => {
       isEnd: false, // 还有没有了
     });
   },0);
+});
+
+// GET /apiclient/getnews/headline 获取Slider信息
+router.get('/headline', (req, res, next) => {
+  const cql = 'select * from Headline';
+  AV.Query.doCloudQuery(cql)
+    // .find()
+    .then((query) => {
+      const results = query.results;
+      const response = [];
+      for (let i = 0; i < results.length; i++) {
+        response.push({
+          objectId: results[i].id,
+          pageLink: results[i].get('pageLink'),
+          pageTitle: results[i].get('pageTitle'),
+          imgUrl: results[i].get('imgUrl'),
+        });
+      }
+      res.json({
+        success: true,
+        message: '发送成功',
+        data: response,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        success: false,
+        message: err.message,
+      });
+    });
 });
 
 export default router;
