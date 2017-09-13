@@ -16,7 +16,7 @@ import S from './News.css';
 
 class News extends React.Component {
   render() {
-    const { postHeadline, getHeadline, news } = this.props;
+    const { postHeadline, getHeadline, deleHeadlineById, news } = this.props;
     return (
       <div className={S.container}>
         <div className={S.content}>
@@ -35,6 +35,8 @@ class News extends React.Component {
                   <ShowSlider
                     {...props}
                     getHeadline={getHeadline}
+                    deleHeadlineById={deleHeadlineById}
+                    setStatus={news.sliderSet}
                     sliderShow={news.sliderShow}
                   />)
               }

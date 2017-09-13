@@ -2,11 +2,24 @@ import React from 'react';
 
 import S from './ShowSlider.css';
 
+// 判断是否为唯一
+const isSetStatusInState = (source, id) => {
+  let flag = false;
+  for (let i = 0; i < source.length; i++) {
+    if (source[i].objectId === id) {
+      flag = true;
+      break;
+    }
+  }
+  return flag;
+};
+
 class ShowSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       imageArr: [],
+      isLoaded: false, // 判断是否初次加载过了
     };
   }
 
@@ -17,22 +30,34 @@ class ShowSlider extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { sliderShow } = nextProps;
-
-    if (!sliderShow.isRequesting && sliderShow.success) {
-      const imageArr = sliderShow.data.map((element, index) => Object.assign({}, element, {
-        isShowClose: false, // 是否展示关闭图标
-      }));
+    const { sliderShow, setStatus } = nextProps;
+    const { isLoaded, imageArr } = this.state;
+    // 初次通过getHeadline()获取数据
+    if (!sliderShow.isRequesting && sliderShow.success && !isLoaded) {
+      const images = sliderShow.data.map((element, index) => ({ ...element, isShowClose: false }));
       this.setState({
-        imageArr,
+        imageArr: images,
+        isLoaded: true,
       });
+    // 已通过getHeadline()获取数据
+    } else if (!sliderShow.isRequesting && sliderShow.success && isLoaded) {
+      // 当setStatus里有数据时并且是独一无二的
+      if (!setStatus.isRequesting && setStatus.success && !isSetStatusInState(imageArr, setStatus.data.objectId)) {
+        const image = { ...setStatus.data, isShowClose: false };
+        imageArr.push(image);
+        this.setState({
+          imageArr,
+        });
+      }
     }
   }
 
-  handleDeleImage = (e) => {
+  handleDeleImage = (e, objectId) => {
     e.stopPropagation();
     e.preventDefault();
-    
+    // 删除图片
+    const { deleHeadlineById } = this.props;
+    this.setState({ isLoaded: false }, () => void deleHeadlineById(objectId));
   }
 
   handleMouseEnterEvt = (e, index) => {
@@ -59,7 +84,6 @@ class ShowSlider extends React.Component {
 
   render() {
     const { imageArr } = this.state;
-    console.log('render');
     // const { sliderShow } = this.props;
     const imageNodes = imageArr.map((element, index) => (
       <div
@@ -78,7 +102,7 @@ class ShowSlider extends React.Component {
           style={{
             display: element.isShowClose ? 'block' : 'none',
           }}
-          onClick={e => this.handleDeleImage(e)}
+          onClick={e => this.handleDeleImage(e, element.objectId)}
         />
       </div>
     ));

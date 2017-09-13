@@ -3,7 +3,7 @@ import news from './news';
 // import oauth from './wxoauth';
 
 const ClientAppRoute = (app) => {
-  app.use('/apimanage/postnews', news);
+  app.use('/apimanage/news', news);
   // app.use('/apiclient/getfuns', funs);
   // app.use('/apiclient/wxoauth', oauth);
 };

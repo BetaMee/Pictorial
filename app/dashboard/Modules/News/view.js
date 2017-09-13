@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 // 获取action
-import { PostHeadline, GetHeadline } from './actions.js';
+import { PostHeadline, GetHeadline, DeleHeadlineById } from './actions.js';
 // 组件
 import News from './components/News';
 
@@ -15,6 +15,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   getHeadline: () => {
     dispatch(GetHeadline());
+  },
+
+  deleHeadlineById: (objectId) => {
+    dispatch(DeleHeadlineById({ objectId }));
   },
 });
 

@@ -9,29 +9,18 @@ class SetSlider extends React.Component {
     super(props);
     this.state = {
       imageArr: [],
+      isLoaded: false,
     };
     this.currentSubmitImg = 0;
   }
 
   componentWillReceiveProps(nextProps) {
     const { setStatus, sliderShow } = nextProps;
-    const { imageArr } = this.state;
-    if (setStatus.isRequesting) { // 当正在请求
-      imageArr[this.currentSubmitImg].isRequesting = true;
-      imageArr[this.currentSubmitImg].isShowSuccess = false;
-      this.setState({
-        imageArr,
-      });
-    } else if (!setStatus.isRequesting && setStatus.success) {  // 成功了
-      imageArr[this.currentSubmitImg].isRequesting = false;
-      imageArr[this.currentSubmitImg].isShowSuccess = true;
-      this.setState({
-        imageArr,
-      });
-    }
-    // 当服务端存在数据时，用于前端显示
-    if (!sliderShow.isRequesting && sliderShow.success) {
-      const images = sliderShow.data.map((element, index) => Object.assign({}, element, {
+    const { imageArr, isLoaded } = this.state;
+
+    // 初次获取数据
+    if (!sliderShow.isRequesting && sliderShow.success && !isLoaded) {
+      const images = sliderShow.data.map((element, index) => ({ ...element,
         thumbnailUrl: element.imgUrl,
         isShowClose: false, // 是否展示关闭图标
         isShowSuccess: true, // 是否展示成功提交
@@ -39,6 +28,26 @@ class SetSlider extends React.Component {
       }));
       this.setState({
         imageArr: images,
+        isLoaded: true,
+      });
+    } else if (!sliderShow.isRequesting && sliderShow.success && isLoaded) {
+      if (setStatus.isRequesting) { // 当正在请求
+        imageArr[this.currentSubmitImg].isRequesting = true;
+        imageArr[this.currentSubmitImg].isShowSuccess = false;
+        this.setState({
+          imageArr,
+        });
+      } else if (!setStatus.isRequesting && setStatus.success) {  // 成功了
+        imageArr[this.currentSubmitImg].isRequesting = false;
+        imageArr[this.currentSubmitImg].isShowSuccess = true;
+        this.setState({
+          imageArr,
+        });
+      }
+      // 当在请求中时，则将isLoaded置为false，表明没有加载完成
+    } else if (sliderShow.isRequesting && !sliderShow.success) {
+      this.setState({
+        isLoaded: false,
       });
     }
   }
@@ -188,12 +197,11 @@ class SetSlider extends React.Component {
   noneClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    console.log(4);
   }
 
   render() {
     const { imageArr } = this.state;
-    const { setStatus } = this.props;
+    // const { setStatus } = this.props;
     const actionNode = []; // 按钮节点
     const imageNode = imageArr.map((element, index) => {
       actionNode.push(
@@ -221,16 +229,16 @@ class SetSlider extends React.Component {
           <button
             className={S.btnDefault}
             style={{
-              opacity: `${(setStatus.isRequesting || element.isShowSuccess) ? 0.4 : 1}`,
+              opacity: `${(element.isRequesting || element.isShowSuccess) ? 0.4 : 1}`,
             }}
-            onClick={e => ((setStatus.isRequesting || element.isShowSuccess) ? this.noneClick(e) : this.handleSubmitImg(e, index))}
+            onClick={e => ((element.isRequesting || element.isShowSuccess) ? this.noneClick(e) : this.handleSubmitImg(e, index))}
           >发布</button>
           <button
             className={S.btnDanger}
             style={{
-              opacity: `${(setStatus.isRequesting || element.isShowSuccess) ? 0.4 : 1}`,
+              opacity: `${(element.isRequesting || element.isShowSuccess) ? 0.4 : 1}`,
             }}
-            onClick={e => ((setStatus.isRequesting || element.isShowSuccess) ? this.noneClick(e) : this.handleDeleteImg(e, index))}
+            onClick={e => ((element.isRequesting || element.isShowSuccess) ? this.noneClick(e) : this.handleDeleteImg(e, index))}
           >删除</button>
         </div>
       );

@@ -9,8 +9,8 @@ const router = express.Router();
 
 const Headline = AV.Object.extend('Headline');
 
-// POST /apimanage/postnews/headline 获取新闻信息
-router.post('/headline', upload.single('imgFile'), (req, res, next) => {
+// POST /apimanage/news/addheadline 增加新闻信息
+router.post('/addheadline', upload.single('imgFile'), (req, res, next) => {
   const content = req.body;
   const imgFile = req.file;
 
@@ -43,6 +43,22 @@ router.post('/headline', upload.single('imgFile'), (req, res, next) => {
             message: err.message,
           });
         });
+    })
+    .catch((err) => {
+      res.json({
+        success: false,
+        message: err.message,
+      });
+    });
+});
+
+// POST /apimanage/news/deleheadline 删除头条信息
+router.post('/deleheadline', (req, res, next) => {
+  const { objectId } = req.body;
+  // 执行 CQL 语句实现删除一个 Todo 对象
+  AV.Query.doCloudQuery(`delete from Headline where objectId="${objectId}"`)
+    .then((success) => {
+      res.redirect('/apiclient/news/headline');
     })
     .catch((err) => {
       res.json({

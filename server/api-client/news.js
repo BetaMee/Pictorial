@@ -6,7 +6,7 @@ const router = express.Router();
 // 查询头条信息
 const queryHeadline = AV.Query('Headline');
 
-// GET /apiclient/getnews 获取新闻信息
+// GET /apiclient/news 获取新闻信息
 router.get('/', (req, res, next) => {
   let data = [{
     src: 'http://www.fotor.com/images2/features/photo_effects/e_bw.jpg',
@@ -105,7 +105,7 @@ router.get('/', (req, res, next) => {
   },0);
 });
 
-// GET /apiclient/getnews/headline 获取Slider信息
+// GET /apiclient/news/headline 获取Slider信息
 router.get('/headline', (req, res, next) => {
   const cql = 'select * from Headline';
   AV.Query.doCloudQuery(cql)
