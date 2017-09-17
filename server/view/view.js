@@ -55,10 +55,13 @@ export const RenderManagePage = (env) => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,user-scalable=no">
         <title>画报后台</title>
+        <link rel="stylesheet"  href="/styles/bundle-manage.css">
       </head>
       <body>
         <div id="app"></div>
-        <script src="/devClient.bundle.js"></script>
+        <script src="/common/common-manifest.js"></script>                
+        <script src="/common/common-reactlib.js"></script>        
+        <script src="/manage/bundle-manage.js"></script>
       </body>
     </html>`;
 };

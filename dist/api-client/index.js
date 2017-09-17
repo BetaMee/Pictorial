@@ -12,10 +12,14 @@ var _funs = require('./funs');
 
 var _funs2 = _interopRequireDefault(_funs);
 
+var _wxoauth = require('./wxoauth');
+
+var _wxoauth2 = _interopRequireDefault(_wxoauth);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const ClientAppRoute = app => {
-  app.use('/apiclient/getnews', _news2.default);
+  app.use('/apiclient/news', _news2.default);
   app.use('/apiclient/getfuns', _funs2.default);
 };
 

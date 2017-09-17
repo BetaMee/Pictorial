@@ -1,0 +1,60 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+
+.container>div {
+  width: 100%;
+  height: 30%;
+  margin: 5px 0;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+}
+
+.container img {
+  width: 100%;
+  height: 75%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.container p {
+  margin: 0px;
+  height: 25%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  padding: 0 3px;
+}
+
+.container p>span{
+  border-radius: 2px;
+}
+
+.closeCover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  background-clip: content-box;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+}
+
+.closeCover + span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../../images/close.png');
+  background-size: 32% 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
+}

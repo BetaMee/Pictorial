@@ -10,13 +10,22 @@ import {
 import SetSlider from './SetSlider';
 import ShowSlider from './ShowSlider';
 import SetList from './SetList';
+import ShowList from './ShowList';
 import NoMatch from '../../../Layout/NoMatch';
 // 样式
 import S from './News.css';
 
 class News extends React.Component {
   render() {
-    const { postHeadline, getHeadline, deleHeadlineById, news } = this.props;
+    const {
+      postHeadline,
+      getHeadline,
+      deleHeadlineById,
+      postNewsLists,
+      getNewsLists,
+      deleNewsListsById,
+      news,
+    } = this.props;
     return (
       <div className={S.container}>
         <div className={S.content}>
@@ -39,6 +48,19 @@ class News extends React.Component {
                     setStatus={news.sliderSet}
                     sliderShow={news.sliderShow}
                   />)
+              }
+            />
+            <Route
+              path="/dashboard/news/set-list"
+              render={
+                props => (
+                  <ShowList
+                    {...props}
+                    listShow={news.listShow}
+                    getNewsLists={getNewsLists}
+                    deleNewsListsById={deleNewsListsById}
+                  />
+                )
               }
             />
             <Route component={NoMatch} />
@@ -69,7 +91,18 @@ class News extends React.Component {
                   />)
               }
             />
-            <Route path="/dashboard/news/set-list" component={SetList} />
+            <Route
+              path="/dashboard/news/set-list"
+              render={
+                props => (
+                  <SetList
+                    {...props}
+                    postNewsLists={postNewsLists}
+                    listShow={news.listShow}
+                  />
+                )
+              }
+            />
             <Route component={NoMatch} />
           </Switch>
         </div>

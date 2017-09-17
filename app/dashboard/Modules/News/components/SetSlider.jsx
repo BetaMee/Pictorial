@@ -91,18 +91,6 @@ class SetSlider extends React.Component {
   }
 
 
-  handleDragEnterEvt = (e) => {
-    // 拖拽进来的事件
-    e.stopPropagation();
-    e.preventDefault();
-  }
-
-  handleDragLeaveEvt = (e) => {
-    // 拖拽离开的事件
-    e.stopPropagation();
-    e.preventDefault();
-  }
-
   handleDragOverEvt = (e) => {
     // 鼠标移动的事件
     e.stopPropagation();
@@ -288,8 +276,6 @@ class SetSlider extends React.Component {
             className={S.dropzone}
             onDrop={this.handleDropEvt}
             onDragOver={this.handleDragOverEvt}
-            onDragEnter={this.handleDragEnterEvt}
-            onDragLeave={this.handleDragLeaveEvt}
           >
             {imageNode}
           </div>

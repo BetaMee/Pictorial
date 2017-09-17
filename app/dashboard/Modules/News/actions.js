@@ -12,6 +12,18 @@ import {
   REQUEST_HEADLINE,
   RECEIVE_HEADLINE,
   ERROR_HEADLINE,
+
+  REQUEST_POST_NEWSLIST,
+  RECEIVE_POST_NEWSLIST,
+  ERROR_POST_NEWSLIST,
+
+  REQUEST_GET_NEWSLIST,
+  RECEIVE_GET_NEWSLIST,
+  ERROR_GET_NEWSLIST,
+
+  REQUEST_DELE_NEWSLIST,
+  RECEIVE_DELE_NEWSLIST,
+  ERROR_DELE_NEWSLIST,
 } from './actionTypes';
 
 // GET 接口，获取头条的数据
@@ -31,7 +43,7 @@ const ErrorGetHeadline = msg => ({
 
 const GetHeadline = () => (dispatch, getState) => {
   dispatch(RequestGetHeadline());
-  return request.get('/apiclient/news/headline')
+  return request.get('/apiclient/news/getheadlines')
     .then(res => res.data)
     .then((data) => {
       if (!data.success) {
@@ -111,4 +123,106 @@ const DeleHeadlineById = objectId => (dispatch, getState) => {
     });
 };
 
-export { PostHeadline, GetHeadline, DeleHeadlineById };
+// POST 添加新闻列表
+const RequestPostNews = () => ({
+  type: REQUEST_POST_NEWSLIST,
+});
+
+const ReceivePostNews = newsLits => ({
+  type: RECEIVE_POST_NEWSLIST,
+  data: newsLits,
+});
+
+const ErrorPostNews = msg => ({
+  type: ERROR_POST_NEWSLIST,
+  msg,
+});
+
+const PostNewsLists = newsList => (dispatch, getState) => {
+  dispatch(RequestPostNews());
+  return request.post('/apimanage/news/addnews', newsList)
+    .then(res => res.data)
+    .then((data) => {
+      if (!data.success) {
+        dispatch(ErrorPostNews(data.message));
+      } else {
+        dispatch(ReceivePostNews(data.data));
+      }
+    })
+    .catch((err) => {
+      dispatch(ErrorPostNews(err.message));
+    });
+};
+
+// GET 新闻列表
+const RequestGetNews = () => ({
+  type: REQUEST_GET_NEWSLIST,
+});
+
+const ReceiveGetNews = newsLits => ({
+  type: RECEIVE_GET_NEWSLIST,
+  data: newsLits,
+});
+
+const ErrorGetNews = msg => ({
+  type: ERROR_GET_NEWSLIST,
+  msg,
+});
+
+const GetNewsLists = () => (dispatch, getState) => {
+  dispatch(RequestGetNews());
+  return request.get('/apiclient/news/getnews')
+    .then(res => res.data)
+    .then((data) => {
+      if (!data.success) {
+        dispatch(ErrorGetNews(data.message));
+      } else {
+        dispatch(ReceiveGetNews(data.data));
+      }
+    })
+    .catch((err) => {
+      dispatch(ErrorGetNews(err.message));
+    });
+};
+
+
+// DELETE 删除新闻中的一条
+const RequestDeleNews = () => ({
+  type: REQUEST_DELE_NEWSLIST,
+});
+
+const ReceiveDeleNews = newsLits => ({
+  type: RECEIVE_DELE_NEWSLIST,
+  data: newsLits,
+});
+
+const ErrorDeleNews = msg => ({
+  type: ERROR_DELE_NEWSLIST,
+  msg,
+});
+
+const DeleNewsListsById = objectId => (dispatch, getState) => {
+  dispatch(RequestDeleNews());
+  return request.post('/apimanage/news/delenews', objectId)
+    .then(res => res.data)
+    .then((data) => {
+      if (!data.success) {
+        dispatch(ErrorDeleNews(data.message));
+      } else {
+        dispatch(ReceiveDeleNews(data.data));
+      }
+    })
+    .catch((err) => {
+      dispatch(ErrorDeleNews(err.message));
+    });
+};
+
+export {
+  PostHeadline,
+  GetHeadline,
+  DeleHeadlineById,
+  PostNewsLists,
+  GetNewsLists,
+  DeleNewsListsById,
+};
+

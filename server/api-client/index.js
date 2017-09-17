@@ -5,7 +5,6 @@ import oauth from './wxoauth';
 const ClientAppRoute = (app) => {
   app.use('/apiclient/news', news);
   app.use('/apiclient/getfuns', funs);
-  app.use('/apiclient/wxoauth', oauth);
 };
 
 export default ClientAppRoute;

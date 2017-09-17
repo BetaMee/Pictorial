@@ -55,16 +55,15 @@ if (process.env.NODE_ENV === 'development') { // 开发模式下
 ClientAppRoute(app);
 DashboardRoute(app);
 
-app.get('/dashboard', (req, res, next) => {
-  const html = RenderManagePage(process.env.NODE_ENV);
-  // res.sendFile(path.resolve(__dirname, './view/client.html'));
-  res.status(200).end(html);
-});
 
 app.get('*', (req, res, next) => {
-  const html = RenderClientPage(process.env.NODE_ENV);
-  // res.sendFile(path.resolve(__dirname, './view/client.html'));
-  res.status(200).end(html);
+  if (/^\/dashboard/.test(req.path)) {
+    const html = RenderManagePage(process.env.NODE_ENV);
+    res.status(200).end(html);
+  } else {
+    const html = RenderClientPage(process.env.NODE_ENV);
+    res.status(200).end(html);
+  }
 });
 
 app.use((req, res, next) => {

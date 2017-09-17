@@ -4,10 +4,10 @@ const autoprefixer = require('autoprefixer');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const APP_CLIENT_PATH = path.resolve(__dirname, './app/client/App.jsx');
-const APP_MANAGE_PATH = path.resolve(__dirname, './app/manage/App.jsx');
+const APP_MANAGE_PATH = path.resolve(__dirname, './app/dashboard/App.jsx');
 
 const BUILD_PATH = path.resolve(__dirname, './build/');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 将所有CSS文件打包
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 将所有CSS文件打包
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -39,77 +39,54 @@ module.exports = {
         ],
       },
 
-      // {
-      //   test: /\.css$/,
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use: [
-      //       {
-      //         loader: 'css-loader',
-      //         options: {
-      //           modules: true, // 开启CSS Module
-      //           localIdentName: '[name]__[local]-[hash:base64:5]',
-      //         },
-      //       },
-      //       {
-      //         loader: 'postcss-loader',
-      //         options: {
-      //           plugins() { // 这里配置postcss的插件
-      //             return [autoprefixer];
-      //           },
-      //         },
-      //       },
-      //     ],
-      //   }),
-      // },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true, // 开启CSS Module
-              localIdentName: '[name]__[local]-[hash:base64:5]',
-              minimize: true, // 压缩
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins() { // 这里配置postcss的插件
-                return [autoprefixer];
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true, // 开启CSS Module
+                localIdentName: '[name]__[local]-[hash:base64:5]',
               },
             },
-          },
-        ],
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins() { // 这里配置postcss的插件
+                  return [autoprefixer];
+                },
+              },
+            },
+          ],
+        }),
       },
-      // { // 处理图片
-      //   test: /\.(png|jpg|gif|webp')$/,
-      //   // include:path.resolve(__dirname,'/client/assets'),
-      //   use: [{
-      //     loader: 'url-loader',
-      //     options: {
-      //       limit: 10000,
-      //       // 这个是输出的图片文件，跟output一致,生成的是bundleImg目录下的图片文件
-      //       name: 'bundleImg/[hash:8].[name].[ext]',
-      //     },
-      //   }],
-      // },
 
-      // { // 处理文字
-      //   test: /\.(woff|ttf|svg|eot|woff2)$/,
-      //   // include:path.resolve(__dirname,'/client/assets'),
-      //   use: [{
-      //     loader: 'url-loader',
-      //     options: {
-      //       limit: 10000,
-      //       name: 'bundleFonts/[hash:8]-[name].[ext]',
-      //     },
-      //   }],
-      // },
+      { // 处理图片
+        test: /\.(png|jpg|gif|webp')$/,
+        // include:path.resolve(__dirname,'/client/assets'),
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            // 这个是输出的图片文件，跟output一致,生成的是bundleImg目录下的图片文件
+            name: 'bundleImg/[hash:8].[name].[ext]',
+          },
+        }],
+      },
+
+      { // 处理文字
+        test: /\.(woff|ttf|svg|eot|woff2)$/,
+        // include:path.resolve(__dirname,'/client/assets'),
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: 'bundleFonts/[hash:8]-[name].[ext]',
+          },
+        }],
+      },
     ],
   },
 
@@ -143,18 +120,7 @@ module.exports = {
       filename: 'common/common-[name].js', // 指定生成的vendor.js名字，不指定也没系，会使用output的配置
       minChunks: Infinity, // 保证不会将业务代码打包进第三方中
     }),
-    // // 生成client的html
-    // new HtmlWebpackPlugin({
-    //   title: '画报',
-    //   filename: 'server/view/app.html',
-    //   chunks: ['client', 'reactlib'], // 在entry里我定义过了a这个chunk
-    // }),
-    // // 生成manage的html
-    // new HtmlWebpackPlugin({
-    //   title: '管理后台',
-    //   filename: 'server/view/manage.html',
-    //   chunks: ['manage', 'reactlib'], // 在entry里我定义过了b这个chunk
-    // }),
+    new ExtractTextPlugin('bundle-manage.css'),
     // new CopyWebpackPlugin([
     //   {
     //     from: path.resolve(__dirname, 'build'),

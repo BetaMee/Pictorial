@@ -14,12 +14,6 @@ const RenderClientPage = exports.RenderClientPage = env => {
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, user-scalable=no">
                 <title>画报测试页面</title>
-                <style>
-                  body{
-                    margin:0px;
-                    padding:0px;
-                  }
-                </style>
               </head>
               <body>
                 <div id="app"></div>
@@ -33,12 +27,6 @@ const RenderClientPage = exports.RenderClientPage = env => {
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, user-scalable=no">
               <title>画报</title>
-              <style>
-                body{
-                  margin:0px;
-                  padding:0px;
-                }
-              </style>
             </head>
             <body>
               <div id="app"></div>
@@ -58,12 +46,6 @@ const RenderManagePage = exports.RenderManagePage = env => {
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, user-scalable=no">
           <title>画报后台测试页面</title>
-          <style>
-            body{
-                margin:0px;
-                padding:0px;
-            }
-          </style>
         </head>
         <body>
           <div id="app"></div>
@@ -78,16 +60,13 @@ const RenderManagePage = exports.RenderManagePage = env => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,user-scalable=no">
         <title>画报后台</title>
-        <style>
-          body{
-              margin:0px;
-              padding:0px;
-          }
-        </style>
+        <link rel="stylesheet"  href="/styles/bundle-manage.css">
       </head>
       <body>
         <div id="app"></div>
-        <script src="/devClient.bundle.js"></script>
+        <script src="/common/common-manifest.js"></script>                
+        <script src="/common/common-reactlib.js"></script>        
+        <script src="/manage/bundle-manage.js"></script>
       </body>
     </html>`;
 };

@@ -71,6 +71,17 @@ class ShowSlider extends React.Component {
     });
   }
 
+  handleMouseMoveEvt = (e, index) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const { imageArr } = this.state;
+
+    imageArr[index].isShowClose = true;
+    this.setState({
+      imageArr,
+    });
+  }
+
   handleMouseLeaveEvt = (e, index) => {
     e.stopPropagation();
     e.preventDefault();
@@ -84,11 +95,11 @@ class ShowSlider extends React.Component {
 
   render() {
     const { imageArr } = this.state;
-    // const { sliderShow } = this.props;
     const imageNodes = imageArr.map((element, index) => (
       <div
         key={index}
         onMouseEnter={e => this.handleMouseEnterEvt(e, index)}
+        onMouseMove={e => this.handleMouseMoveEvt(e, index)}
         onMouseLeave={e => this.handleMouseLeaveEvt(e, index)}
       >
         <img src={element.imgUrl} alt="" />

@@ -105,11 +105,40 @@ router.get('/', (req, res, next) => {
   },0);
 });
 
-// GET /apiclient/news/headline 获取Slider信息
-router.get('/headline', (req, res, next) => {
+// GET /apiclient/news/getnews 获取新闻信息
+router.get('/getnews', (req, res, next) => {
+  const cql = 'select * from NewsLists';
+  AV.Query.doCloudQuery(cql)
+    .then((query) => {
+      const results = query.results;
+      const response = [];
+      for (let i = 0; i < results.length; i++) {
+        response.push({
+          objectId: results[i].id,
+          pageLink: results[i].get('pageLink'),
+          pageTitle: results[i].get('pageTitle'),
+          category: results[i].get('category'),
+          imgUrl: results[i].get('imgUrl'),
+        });
+      }
+      res.json({
+        success: true,
+        message: '发送成功',
+        data: response,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        success: false,
+        message: err.message,
+      });
+    });
+});
+
+// GET /apiclient/news/getheadlines 获取Slider信息
+router.get('/getheadlines', (req, res, next) => {
   const cql = 'select * from Headline';
   AV.Query.doCloudQuery(cql)
-    // .find()
     .then((query) => {
       const results = query.results;
       const response = [];
