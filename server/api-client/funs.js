@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-// GET /apiclient/getnews 获取新闻信息
+// GET /apiclient/funs 获取新闻信息
 router.get('/', (req, res, next) => {
   let data = [{
     type: 'voice',

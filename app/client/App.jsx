@@ -5,7 +5,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-// readux
+// redux
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { createBrowserHistory } from 'history';

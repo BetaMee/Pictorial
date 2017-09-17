@@ -1,0 +1,53 @@
+.container {
+  width: 100%;
+  height: 92%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.content{
+  width: 30%;
+  height: 100%;
+  padding: 1.4rem;
+  background-color: #F5F5F5;
+  overflow-x: hidden;
+  /* overflow-y: scroll; */
+}
+
+.action{
+  width: 70%;
+  height: 100%;
+  background-color: #FAFAFA;  
+}
+
+/*选项卡*/
+.navbar{
+  width: 100%;
+  height: 10%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: #F5F5F5;
+}
+
+.navbar li {
+  list-style: none;
+  display: block;
+  width: 30%;
+}
+
+.navbar a {
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #616161;
+}
+
+.navbaractive {
+  background-color: #FAFAFA;
+}

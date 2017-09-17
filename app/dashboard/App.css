@@ -1,0 +1,11 @@
+.base {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.main {
+  width: 80%;
+  height: 100%;
+}

@@ -30,14 +30,18 @@ var _index = require('./api-client/index');
 
 var _index2 = _interopRequireDefault(_index);
 
+var _index3 = require('./api-manage/index');
+
+var _index4 = _interopRequireDefault(_index3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
 // require('./cloud/cloud.js');
 
-// 生成客户端HTML视图
-const app = (0, _express2.default)();
 // Client路由
+const app = (0, _express2.default)();
+// 生成客户端HTML视图
 
 
 app.use(_express2.default.static(_path2.default.resolve(__dirname, '../build')));
@@ -77,11 +81,16 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 (0, _index2.default)(app);
+(0, _index4.default)(app);
 
 app.get('*', (req, res, next) => {
-  const html = (0, _view.RenderClientPage)(process.env.NODE_ENV);
-  // res.sendFile(path.resolve(__dirname, './view/client.html'));
-  res.status(200).end(html);
+  if (/^\/dashboard/.test(req.path)) {
+    const html = (0, _view.RenderManagePage)(process.env.NODE_ENV);
+    res.status(200).end(html);
+  } else {
+    const html = (0, _view.RenderClientPage)(process.env.NODE_ENV);
+    res.status(200).end(html);
+  }
 });
 
 app.use((req, res, next) => {

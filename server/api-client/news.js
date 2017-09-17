@@ -1,8 +1,12 @@
 import express from 'express';
+import AV from 'leanengine';
+
 
 const router = express.Router();
+// 查询头条信息
+const queryHeadline = AV.Query('Headline');
 
-// GET /apiclient/getnews 获取新闻信息
+// GET /apiclient/news 获取新闻信息
 router.get('/', (req, res, next) => {
   let data = [{
     src: 'http://www.fotor.com/images2/features/photo_effects/e_bw.jpg',
@@ -99,6 +103,65 @@ router.get('/', (req, res, next) => {
       isEnd: false, // 还有没有了
     });
   },0);
+});
+
+// GET /apiclient/news/getnews 获取新闻信息
+router.get('/getnews', (req, res, next) => {
+  const cql = 'select * from NewsLists';
+  AV.Query.doCloudQuery(cql)
+    .then((query) => {
+      const results = query.results;
+      const response = [];
+      for (let i = 0; i < results.length; i++) {
+        response.push({
+          objectId: results[i].id,
+          pageLink: results[i].get('pageLink'),
+          pageTitle: results[i].get('pageTitle'),
+          category: results[i].get('category'),
+          imgUrl: results[i].get('imgUrl'),
+        });
+      }
+      res.json({
+        success: true,
+        message: '发送成功',
+        data: response,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        success: false,
+        message: err.message,
+      });
+    });
+});
+
+// GET /apiclient/news/getheadlines 获取Slider信息
+router.get('/getheadlines', (req, res, next) => {
+  const cql = 'select * from Headline';
+  AV.Query.doCloudQuery(cql)
+    .then((query) => {
+      const results = query.results;
+      const response = [];
+      for (let i = 0; i < results.length; i++) {
+        response.push({
+          objectId: results[i].id,
+          pageLink: results[i].get('pageLink'),
+          pageTitle: results[i].get('pageTitle'),
+          imgUrl: results[i].get('imgUrl'),
+        });
+      }
+      res.json({
+        success: true,
+        message: '发送成功',
+        data: response,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        success: false,
+        message: err.message,
+      });
+    });
 });
 
 export default router;
